@@ -50,13 +50,29 @@ class Usuari
         }
     }
 
+    public function getCodiByEmail($email)
+    {
+        try {
+            $result = array();
+            $stm = $this->conn->prepare("SELECT codiusuari FROM usuari WHERE email='$email'");
+            $stm->execute();
+            $tuples = $stm->fetchAll();
+            $this->resposta->setDades($tuples);    // array de tuples
+            $this->resposta->setCorrecta(true);       // La resposta es correcta
+            return $this->resposta;
+        } catch (Exception $e) {   // hi ha un error posam la resposta a fals i tornam missatge d'error
+            $this->resposta->setCorrecta(false, $e->getMessage());
+            return $this->resposta;
+        }
+    }
+
     public function login($email, $passwd)
     {
 
         try {
-            $sql = "SELECT codiusuari,nom,email FROM $this->table WHERE email= ? and password= ?";
+            $sql = "SELECT codiusuari,nom,email FROM usuari WHERE email='$email' and password='$passwd'";
             $stm = $this->conn->prepare($sql);
-            $stm->execute(array($email, $passwd));
+            $stm->execute();
             if ($tupla = $stm->fetch()) {
                 // Login correcta: genera token
                 $token = bin2hex(openssl_random_pseudo_bytes(16));
