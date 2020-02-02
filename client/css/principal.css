@@ -1,0 +1,12 @@
+.img-center {
+    margin: 0 auto;
+}    
+#errorlogindiv, #errorUsuariRegistreDiv, #errorContrasenyaRegistreDiv{
+	color: #ce2700;
+	font-family: Open Sans;
+	font-weight: bold;    
+}
+
+html, body {
+	height: 100%;
+}
