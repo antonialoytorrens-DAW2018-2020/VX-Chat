@@ -19,13 +19,12 @@ $app->group('/missatge/', function () {
         $atributs = $req->getParsedBody();
         $obj = new Missatge();
         $usr = new Usuari();
-        $usr->getCodiByEmail($atributs["email"]);
         return $res
             ->withHeader('Content-type', 'application/json')
             ->getBody()
             ->write(
                 json_encode(
-                    $obj->enviarmissatge($atributs["email"], $atributs["msg"])
+                    $obj->enviarmissatge($atributs["codiusuari"], $atributs["msg"])
                 )
             );
     });
