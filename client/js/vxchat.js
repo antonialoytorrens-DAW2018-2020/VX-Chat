@@ -6,8 +6,8 @@ const URL_ENVIAMISSATGE = mydir + "../../server/public/missatge/";
 const URL_LLEGIR = mydir + "../../server/public/missatge/";
 const URL_PERFIL = mydir + "../../server/public/usuari/";
 var mlsg = 6000;
-var nomgalleta = 'quepassaehNom';
-var pswgalleta = 'quepassaehPsw';
+var nomgalleta = 'vxChat-Nom';
+var pswgalleta = 'vxChat-Psw';
 
 window.onload = function () {
   carregaInici();
