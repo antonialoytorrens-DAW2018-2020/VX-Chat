@@ -1,0 +1,371 @@
+const scripts = document.getElementsByTagName('script');
+const path = scripts[scripts.length - 1].src.split('?')[0];
+const mydir = path.split('/').slice(0, -1).join('/') + '/';
+const URL_LOGIN = mydir + "../../server/public/login/";
+const URL_ENVIAMISSATGE = mydir + "../../server/public/missatge/";
+const URL_LLEGIR = mydir + "../../server/public/missatge/";
+const URL_PERFIL = mydir + "../../server/public/usuari/";
+var mlsg = 6000;
+var nomgalleta = 'quepassaehNom';
+var pswgalleta = 'quepassaehPsw';
+
+window.onload = function () {
+  carregaInici();
+}
+
+function carregaInici() {
+  var boto = document.getElementById('btlogin');
+  var registre = document.getElementById('register');
+  var pswdiv = document.getElementById('pswdiv');
+  pswdiv.setAttribute("style", "display: block");
+  fadeIn(pswdiv, 1000);
+  document.getElementById('pswdiv').setAttribute("style", "display: block");
+  document.getElementById('pswregistre').setAttribute("style", "display: none");
+  document.getElementById('chatdiv').setAttribute("style", "display: none");
+  document.getElementById('logindiv').setAttribute("style", "display: none");
+  document.getElementById('perfildiv').setAttribute("style", "display: none");
+  document.getElementById('errorlogindiv').setAttribute("style", "display: none");
+  document.getElementById('nom').value = getCookie(nomgalleta);
+  document.getElementById('psw').value = getCookie(pswgalleta);
+
+  document.getElementById("nom").addEventListener("change", function () {
+    posaGalleta();
+  });
+
+  document.getElementById("psw").addEventListener("change", function () {
+    posaGalleta();
+  });
+
+  //document.getElementById('nom').onchange = posaGalleta;
+  //document.getElementById('psw').onchange = posaGalleta;
+
+  document.getElementById('btperfil').addEventListener("click", function () {
+    editaperfil();
+  });
+
+  document.getElementById('btperfilcancela').addEventListener("click", function () {
+    editamissatges();
+  });
+
+  document.getElementById('btperfilguarda').addEventListener("click", function () {
+    var rq = agafaObjecte();
+    guardaperfil(rq);
+  });
+
+  boto.addEventListener("click", function () {
+    var rq = agafaObjecte();
+    validaLogin(rq);
+  });
+
+  registre.addEventListener("click", function () {
+    registreUsuari();
+  });
+}
+
+function registreUsuari() {
+  let registre = document.getElementById('pswregistre');
+  document.getElementById('pswdiv').setAttribute("style", "display: none");
+  document.getElementById('chatdiv').setAttribute("style", "display: none");
+  document.getElementById('errorUsuariRegistreDiv').setAttribute("style", "display: none");
+  document.getElementById('errorContrasenyaRegistreDiv').setAttribute("style", "display: none");
+  registre.setAttribute("style", "display: block");
+  fadeIn(registre, 1000);
+  document.getElementById('chatdiv').setAttribute("style", "display: none");
+  document.getElementById('logindiv').setAttribute("style", "display: none");
+  document.getElementById('perfildiv').setAttribute("style", "display: none");
+  document.getElementById('errorlogindiv').setAttribute("style", "display: none");
+
+  document.getElementById("btRegistre").addEventListener("click", function () {
+    var rq = agafaObjecte();
+    afegeixUsuari(rq);
+  });
+
+  document.getElementById("signin").addEventListener("click", function () {
+    carregaInici();
+  });
+
+}
+
+/*function afegeixUsuari(rq){
+  var nom = document.getElementById('nom-registre').value;
+  var email = document.getElementById('email-registre').value;
+  var psw = document.getElementById('psw-registre').value;
+  var psw2 = document.getElementById('psw-registre2').value;
+
+  // REGISTRA L'USUARI
+  rq.onreadystatechange = function () { enviaMissatge_mostra(rq, msg); };
+  rq.open("POST", URL_ENVIAMISSATGE, true);
+  rq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  var token = document.getElementById('token').value;
+  rq.setRequestHeader('Authorization', token);
+  rq.send("codiusuari=" + codiusuari + "&msg=" + msg);
+}*/
+
+function editaperfil() {
+  document.getElementById('pswdiv').setAttribute("style", "display: none");
+  document.getElementById('chatdiv').setAttribute("style", "display: none");
+  document.getElementById('perfildiv').setAttribute("style", "display: block");
+  document.getElementById('perfilnom').value = document.getElementById('nom_usuari').value;
+  document.getElementById('perfilemail').value = document.getElementById('email_usuari').value;
+}
+
+function editamissatges() {
+  document.getElementById('pswdiv').setAttribute("style", "display: none");
+  document.getElementById('chatdiv').setAttribute("style", "display: block");
+  document.getElementById('perfildiv').setAttribute("style", "display: none");
+}
+
+function agafaObjecte() {
+  if (window.XMLHttpRequest) {
+    return (new XMLHttpRequest());
+  } else {
+    if (window.ActiveXObject) {
+      return (new ActiveXObject("Microsoft.XMLHTTP"));
+    } else { return (null); }
+  }
+}
+
+function validaLogin(rq) {
+  var email = document.getElementById('nom').value;
+  var psw = document.getElementById('psw').value;
+  rq.onreadystatechange = function () { validaLogin_fer(rq); };
+  rq.open("POST", URL_LOGIN, true);
+  rq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  rq.send("email=" + email + "&password=" + psw);
+}
+
+function validaLogin_fer(rq) {
+  if (rq.readyState == 4) {
+    if (rq.status == 200) {
+      var resposta = JSON.parse(rq.responseText);
+      var ok = resposta.correcta;
+
+      if (ok) {
+        var dades = resposta.dades;
+        var codiusuari = dades.codiusuari;
+        document.getElementById('codiusuari').value = codiusuari;
+        var nomusuari = dades.nom;
+        var emailusuari = dades.email;
+        document.getElementById('nomusuari').textContent = nomusuari;
+        document.getElementById('nom_usuari').value = nomusuari;
+        document.getElementById('email_usuari').value = emailusuari;
+        var token = dades.token;
+        document.getElementById('token').value = token;
+        document.getElementById('pswdiv').setAttribute("style", "display: none");
+        var chatdiv = document.getElementById('chatdiv');
+        chatdiv.setAttribute("style", "display: block");
+        fadeIn(chatdiv, 1000);
+        var logindiv = document.getElementById('logindiv');
+        logindiv.setAttribute("style", "display: block");
+        var boto = document.getElementById('btnoumsg');
+
+        boto.addEventListener("click", function () {
+          var rq = agafaObjecte();
+          enviaMissatge(rq);
+        });
+
+        mostraSpin();
+        carregaMissatges(rq);
+        //interval = setInterval(carregaMissatges, mlsg);
+        document.getElementById("logout").addEventListener("click", function () {
+          carregaInici();
+        });
+      } else {
+        document.getElementById('errorlogindiv').setAttribute("style", "display: initial");
+      }
+    }
+  }
+}
+
+function actualitzaMissatge(codiusuari, msg) {
+    var llistaMissatges = document.getElementById("missatges");
+    var darrerMissatge = llistaMissatges.lastElementChild.innerHTML;
+}
+
+function enviaMissatge(rq) {
+  var msg = document.getElementById('noumissatge').value;
+  var codiusuari = document.getElementById('codiusuari').value;
+  rq.open("POST", URL_ENVIAMISSATGE, true);
+  rq.onreadystatechange = function () { actualitzaMissatge(codiusuari, msg); };
+  rq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  var token = document.getElementById('token').value;
+  rq.setRequestHeader('Authorization', token);
+  rq.send("codiusuari=" + codiusuari + "&msg=" + msg);
+}
+
+function enviaMissatge_mostra(rq, msg) {
+  if (rq.readyState == 4) {
+    var msg = document.getElementById('noumissatge');
+    if (rq.status == 200) {
+      mostraMissatges(rq);
+      msg.value = '';
+    } else {
+      msg.innerHTML = 'Error enviant missatge ';
+    }
+  }
+}
+
+function carregaMissatges(rq) {
+  rq.onreadystatechange = function () { mostraMissatges(rq); };
+  rq.open("GET", URL_LLEGIR, true);
+  var token = document.getElementById('token').value;
+  rq.setRequestHeader('Authorization', token);
+  rq.send(null);
+}
+
+function formataData(d) {
+  var dia = d.substr(8, 2);
+  var mes = d.substr(5, 2);
+  var anio = d.substr(0, 4);
+  var hora = d.substr(11, 2);
+  var min = d.substr(14, 2);
+  return dia + '-' + mes + '-' + anio + ' ' + hora + ':' + min;
+}
+
+function mostraMissatges(rq) {
+
+  //var token = document.getElementById('token').value;
+  //rq.setRequestHeader('Authorization', token);
+  //rq.send(null);
+  var codiUsuariActual = document.getElementById("codiusuari").value;
+
+  if (rq.readyState == 4 && rq.status == 200) {
+    var msg = document.getElementById('missatges');
+    var resposta = JSON.parse(rq.responseText);
+    // Sessió no iniciada
+    if (!resposta.correcta) {
+      msg.innerHTML = '<h3><p class="bg-danger text-center">' + resposta.missatge + '</p></h3>';
+    }
+    else {
+      var json = resposta.dades;
+      for (i in json) {
+        var fila = document.createElement("li");
+        fila.setAttribute('class', 'list-group-item');
+        if (json[i].codiusuari == codiUsuariActual) {
+          fila.setAttribute('style', 'background-color:#ccffff');
+        } else {
+          fila.setAttribute('style', 'background-color:#ccffcc');
+        }
+        var span = document.createElement("span");
+        span.setAttribute('style', 'font-size:9px');
+        span.setAttribute('class', 'badge');
+        span.innerHTML = formataData(json[i].datahora) + ' ' + json[i].nom;
+        fila.appendChild(span);
+        // foto
+        /*
+        if (json[i].foto!=''){
+         var img=document.createElement("img");
+         img.setAttribute('height','50');
+         img.setAttribute('class','rounded-circle z-depth-2');
+         img.setAttribute('src',json[i].foto);
+         img.setAttribute('data-holder-rendered',true);
+         fila.appendChild(img);
+        }*/
+        //
+        var p = document.createElement("p");
+        p.setAttribute('style', 'font-size:14px');
+        p.setAttribute('id', 'missatge' + json[i].codimissatge);
+        p.innerHTML = json[i].msg;
+        fila.appendChild(p);
+
+        msg.appendChild(fila);
+
+        // SPEECH AUDIO
+        var buttonVolumeUp = document.createElement("button");
+        buttonVolumeUp.setAttribute("type", "button");
+        buttonVolumeUp.setAttribute("class", "btn btn-light float-right");
+        buttonVolumeUp.setAttribute('id', 'audiomissatge-' + json[i].codimissatge);
+
+        var volumeUp = document.createElement("i");
+        volumeUp.setAttribute('class', 'fa fa-volume-up');
+        volumeUp.setAttribute('aria-hidden', 'true');
+
+        buttonVolumeUp.appendChild(volumeUp);
+        fila.appendChild(buttonVolumeUp);
+
+        buttonVolumeUp.addEventListener("click", function () {
+          let boto = this.id;
+          var idBoto = boto.split("-")[1];
+          let missatge = document.getElementById('missatge' + idBoto).textContent;
+          speak(missatge);
+        });
+        // MOSTRA EL TEXTAREA PER ENVIAR UN NOU MISSATGE
+        // scrollElementIntoViewBottom(document.getElementById("noumissatge"));
+      }
+      document.getElementById('noumissatge').innerHTML='';
+      ocultaSpin();
+    }
+  } else {
+    if (rq.status != 200) {
+      var msg = document.getElementById('noumissatge');
+      msg.innerHTML = 'Error loading messages';
+      ocultaSpin();
+    }
+  }
+}
+
+//////////////////////////////////   PERFIL /////////////////
+function guardaperfil(rq) {
+  //rq
+  var formdata = new FormData();
+  var email = document.getElementById('perfilemail').value;
+  formdata.append('email', email);
+  var nom = document.getElementById('perfilnom').value;
+  formdata.append('nom', nom);
+  var password = document.getElementById('perfilpsw').value;
+  formdata.append('password', password);
+  var foto = document.getElementById('perfilfoto').files[0];
+  formdata.append('foto', foto);
+  //objecte
+  rq.onreadystatechange = function () { resultatPerfil(rq); };
+  rq.open("POST", URL_PERFIL, true);
+  var token = document.getElementById('token').value;
+  rq.setRequestHeader('Authorization', token);
+  //rq.setRequestHeader('Content-Type', 'multipart/form-data');
+  rq.send(formdata);
+}
+
+function resultatPerfil(rq) {
+  if (rq.readyState == 4) {
+    if (rq.status == 200) {
+      editamissatges();
+    } else {
+      // TODO
+    }
+  }
+}
+///////////////////////////////////////////////////////////////////////////
+
+
+function ocultaSpin() {
+  document.getElementById('spin').style.visibility = 'hidden';
+}
+
+function mostraSpin() {
+  document.getElementById('spin').style.visibility = 'visible';
+}
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1);
+    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+  }
+  return "";
+}
+
+function posaGalleta() {
+  var nom = document.getElementById('nom').value;
+  setCookie(nomgalleta, nom, 30);
+  var psw = document.getElementById('psw').value;
+  setCookie(pswgalleta, psw, 30);
+}

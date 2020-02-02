@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--FONT AWESOME-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <!-- Bootstrap -->
+  <link href="bs/css/bootstrap.min.css" rel="stylesheet">
+  <!--<script src="bs/css/bootstrap.min.js"></script>-->
+  <!-- css -->
+  <link href="./css/login.css" rel="stylesheet">
+  <link href="./css//principal.css" rel="stylesheet">
+  <!--Funcions-->
+  <script src="./js/funcions.js"></script>
+  <!-- Codi ajax -->
+  <script src="./js/quepassaeh.js"></script>
+  <title>.::QuePassaEh::.</title>
+</head>
+
+<body>
+  <input type="hidden" value="-1" id="codiusuari">
+  <input type="hidden" value="" id="token">
+  <input type="hidden" value="" id="nom_usuari">
+  <input type="hidden" value="" id="email_usuari">
+
+  <!--MENU-->
+
+  <nav class="navbar navbar-light bg-light" style="height: 10%;">
+    <div class="navbar-brand font-weight-bold w-100 float-left">
+      <img src="./img/vx.png" class="d-inline-block img-fluid" alt="VX-Chat Logo">
+      <span class="text-center align-top">VX-Chat<span id="extra-text-hide"> - The International Chat for
+          Everyone</span></span>
+      <span class="extra-text-show text-center align-top">The International Chat</span><br />
+      <span class="extra-text-show text-center align-top">for Everyone</span>
+      <div class="col-xs-8 col-sm-8 col-md-8" id="logindiv">
+        <span id="nomusuari"></span>&nbsp;&nbsp;&nbsp;<button id="btperfil" class="btn btn-link">Perfil</button>
+        <button id="logout" class="btn btn-link">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <!--SIGN IN-->
+  
+  <div class="container" id="pswdiv">
+    <div class="d-flex justify-content-center h-100">
+      <div class="card" style="display: -webkit-box;">
+        <div class="card-header">
+          <h3>Sign In</h3>
+        </div>
+        <div class="card-body">
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input type="text" id="nom" name="NOM" class="form-control" placeholder="Username">
+          </div>
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            <input type="password" id="psw" name="PSW" class="form-control" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <input type="submit" value="Login" id="btlogin" class="btn float-right login_btn">
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex justify-content-center links">
+            Don't have an account?<a id="register">Sign Up</a>
+          </div>
+          <div class="d-flex justify-content-center">
+            <div id="errorlogindiv">Error: User or password is wrong.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--SIGN UP-->
+
+  <div class="container" id="pswregistre">
+    <div class="d-flex justify-content-center h-100">
+      <div class="card" style="display: -webkit-box;">
+        <div class="card-header">
+          <h3>Sign Up</h3>
+        </div>
+        <div class="card-body">
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input type="text" id="nom-registre" name="NOM-REGISTRE" class="form-control" placeholder="Username">
+          </div>
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            </div>
+            <input type="text" id="email-registre" name="EMAIL-REGISTRE" class="form-control" placeholder="Email">
+          </div>
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            <input type="password" id="psw-registre" name="PSW-REGISTRE" class="form-control"
+              placeholder="Password"><input type="password" id="psw-registre2" name="PSW-REGISTRE2" class="form-control"
+              placeholder="Repeat Password">
+          </div>
+          <div class="form-group">
+            <input type="submit" value="Sign Up" id="btRegistre" class="btn float-right login_btn">
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex justify-content-center links">
+            Already have an account?<a id="signin">Sign In</a>
+          </div>
+          <div class="d-flex justify-content-center links">
+            <div id="errorUsuariRegistreDiv">Error: This username is not available.</div>
+          </div>
+          <div class="d-flex justify-content-center links">
+            <div id="errorContrasenyaRegistreDiv">Error: Wrong password.</div id="errorContrasenyaRegistreDiv">
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <!--MESSAGE LIST-->
+
+    <div class="container col-xs-12 col-sm-8 col-md-6 h-100" id="chatdiv">
+      <div class="col-xs-8 col-sm-8 col-md-8" <span id="nomusuari"></span>&nbsp;&nbsp;&nbsp;<label><select
+            id="voiceOptions"></select>
+      </div>
+
+
+      <ul class="list-group" id="missatges">
+      </ul>
+
+
+      <div id="spin" class="row">
+        <img id="volta" class="img-responsive img-center" src="./img/loading.gif" alt="">
+      </div>
+
+      <div class="panel panel-default col-xs-12 col-sm-12 col-md-12">
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-xs-9 col-sm-9 col-md-9"><textarea class="form-control" rows="3" cols="100"
+                id="noumissatge"></textarea></div>
+            <div class="col-xs-2 col-sm-2 col-md-2"><input type="button" id="btnoumsg"
+                class="btn btn-yellow btn-lg active" value="+"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+<!--PROFILE-->
+
+    <div class="container col-xs-12 col-sm-8 col-md-6" id="perfildiv">
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6">
+          <label for="perfilnom">Nom</label><input type="text" class="form-control" id="perfilnom" name="PERFILNOM">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6">
+          <label for="perfilemail">Email</label><input type="text" class="form-control" id="perfilemail"
+            name="PERFILEMAIL">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6"><label for="perfilpsw">Password</label><input type="password"
+            class="form-control" id="perfilpsw" name="PERFILPSW"></div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6"><label for="perfilfoto">Foto</label><input type="file"
+            class="form-control" id="perfilfoto" name="PERFILFOTO"></div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6">&nbsp;</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6">
+          <input type="button" id="btperfilguarda" class="btn btn-primary btn-lg active" value="Guarda">
+          <input type="button" id="btperfilcancela" class="btn btn-info btn-lg" value="Cancel·la">
+        </div>
+      </div>
+    </div>
+</body>
+<!--Speech Converter-->
+<script src="./js/speechConverter.js"></script>
+
+</html>

@@ -94,4 +94,10 @@ class Usuari
             return $this->resposta;
         }
     }
+    function insertUsuari($nom, $email, $passwd) {
+        $query = "INSERT INTO usuari (nom, email, password) VALUES ($nom, $email, $passwd)";
+        $stm = $this->conn->prepare($query);
+        $stm->execute();
+        return $stm;
+    }
 }
