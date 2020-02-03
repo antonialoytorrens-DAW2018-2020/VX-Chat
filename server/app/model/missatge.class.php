@@ -22,7 +22,7 @@ class Missatge
     {
         try {
             $result = array();
-            $stm = $this->conn->prepare("SELECT codimissatge, nom, msg, datahora FROM missatge INNER JOIN usuari ON missatge.codiusuari = usuari.codiusuari ORDER BY $orderby");
+            $stm = $this->conn->prepare("SELECT codimissatge, nom, msg, datahora FROM missatge INNER JOIN usuari ON missatge.codiusuari = usuari.codiusuari ORDER BY $orderby LIMIT 20");
             $stm->execute();
             $tuples = $stm->fetchAll();
             $this->resposta->setDades($tuples);    // array de tuples
@@ -38,7 +38,7 @@ class Missatge
     {
         try {
             $result = array();
-            $stm = $this->conn->prepare("SELECT * FROM missatge WHERE codimissatge='$codimissatge'");
+            $stm = $this->conn->prepare("SELECT codimissatge, nom, msg, datahora FROM missatge INNER JOIN usuari ON missatge.codiusuari = usuari.codiusuari WHERE codimissatge='$codimissatge'");
             $stm->execute();
             $tuples = $stm->fetchAll();
             $this->resposta->setDades($tuples);    // array de tuples
@@ -55,7 +55,12 @@ class Missatge
             $result = array();
             $stm = $this->conn->prepare("INSERT INTO missatge (codiusuari, msg) VALUES ('$codiusuari', '$text')");
             $stm->execute();
-            $this->resposta->setCorrecta(true);       // La resposta es correcta
+            $this->resposta->setCorrecta(true);
+
+            // GET LAST INSERT ID
+
+            $id = $this->conn->lastInsertId();           
+            return $this->getOne($id);
         } catch (Exception $e) {   // hi ha un error posam la resposta a fals i tornam missatge d'error
             $this->resposta->setCorrecta(false, $e->getMessage());
             return $this->resposta;
