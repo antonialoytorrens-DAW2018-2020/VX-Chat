@@ -124,6 +124,9 @@ function afegeixUsuari(rq) {
         if (resposta.correcta == false) {
           document.getElementById('errorUsuariRegistreDiv2').setAttribute("style", "display: block");
         } else {
+          var note_message = document.getElementById('note_message');
+          note_message.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><b>User created successfully.</b>';
+          showIt(document.getElementById("modal"));
         }
       }
     };
@@ -383,6 +386,9 @@ function enviaMissatge_mostra(rq) {
     creaBlocMissatge2(datahora, codiusuari, nom, codimissatge, missatge);
     msg.value = '';
     document.getElementById("error-message").innerHTML = '';
+    let note_message = document.getElementById("note_message");
+    note_message.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><b>Message sent successfully.</b>';
+    showIt(document.getElementById("modal"));
   } else {
     msg = document.getElementById("error-message");
     msg.innerHTML = 'Error sending message. Try again later.';

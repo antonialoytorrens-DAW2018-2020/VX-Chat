@@ -29,6 +29,10 @@ body {
   margin-bottom: 8rem !important;
 }
 
+#modal {
+  display: none !important;
+}
+
 @media(max-height: 650px) {
   footer {
     display: fixed;

@@ -25,3 +25,8 @@ function scrollElementIntoViewBottom(elmnt) {
 function isEmptyOrSpaces(str){
   return str === null || str.match(/^ *$/) !== null;
 }
+
+function showIt(el) {
+  setTimeout(function() { el.setAttribute("style", "display: flex !important;") } , 1000);
+  setTimeout(function() { el.setAttribute("style", "display: none !important;") } , 5000);
+}
