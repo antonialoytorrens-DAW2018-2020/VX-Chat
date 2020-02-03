@@ -22,7 +22,7 @@ class Missatge
     {
         try {
             $result = array();
-            $stm = $this->conn->prepare("SELECT codimissatge, nom, msg, datahora FROM missatge INNER JOIN usuari ON missatge.codiusuari = usuari.codiusuari ORDER BY $orderby LIMIT 20");
+            $stm = $this->conn->prepare("SELECT codimissatge, nom, msg, datahora FROM missatge INNER JOIN usuari ON missatge.codiusuari = usuari.codiusuari ORDER BY $orderby DESC LIMIT 20");
             $stm->execute();
             $tuples = $stm->fetchAll();
             $this->resposta->setDades($tuples);    // array de tuples

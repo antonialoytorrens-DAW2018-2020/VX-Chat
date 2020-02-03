@@ -1,7 +1,7 @@
 .img-center {
     margin: 0 auto;
 }    
-#errorlogindiv, #errorUsuariRegistreDiv, #errorContrasenyaRegistreDiv, #error-message{
+#errorlogindiv, #errorUsuariRegistreDiv, #errorContrasenyaRegistreDiv, #error-message, #errorUsuariRegistreDiv2{
 	color: #ce2700;
 	font-family: Open Sans;
 	font-weight: bold;    
@@ -11,13 +11,26 @@ html, body {
 	height: 100%;
 }
 
+body {
+  clear: both;
+}
+
 #noumissatge {
 	padding: .5 rem 1 rem;
 }
 
-.d-flex .justify-content-center .h-100 {
-  width: 50px;
-  border: 1px solid #c3c3c3;
-  display: flex;
-  flex-wrap: wrap;
+.card {
+  height: auto !important;
+}
+
+
+#chatdiv {
+  margin-top: 8rem !important;
+  margin-bottom: 8rem !important;
+}
+
+@media(max-height: 650px) {
+  footer {
+    display: fixed;
+  }
 }

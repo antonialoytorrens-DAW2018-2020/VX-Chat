@@ -84,7 +84,7 @@ class Usuari
                 $this->resposta->setDades($tupla);    // array de tuples
                 $this->resposta->setCorrecta(true);       // La resposta es correcta        
             } else {
-                $this->resposta->setCorrecta(false, 0, "login incorrecta $email $passwd");
+                $this->resposta->setCorrecta(false, 0, "Login Incorrecte");
             }
             return $this->resposta;
         } catch (\Exception $e) {
@@ -94,10 +94,17 @@ class Usuari
             return $this->resposta;
         }
     }
-    function insertUsuari($nom, $email, $passwd) {
-        $query = "INSERT INTO usuari (nom, email, password) VALUES ($nom, $email, $passwd)";
-        $stm = $this->conn->prepare($query);
-        $stm->execute();
-        return $stm;
+    function insertUsuari($nom, $email, $passwd)
+    {
+        try {
+            $query = "INSERT INTO usuari (nom, email, password) VALUES ('$nom', '$email', '$passwd')";
+            $stm = $this->conn->prepare($query);
+            $stm->execute();
+            $this->resposta->setCorrecta(true);       // La resposta es correcta
+            return $this->resposta;
+        } catch (Exception $e) {   // hi ha un error posam la resposta a fals i tornam missatge d'error
+            $this->resposta->setCorrecta(false, $e->getMessage());
+            return $this->resposta;
+        }
     }
 }

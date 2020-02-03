@@ -21,3 +21,7 @@ function scrollElementIntoViewTop(elmnt) {
 function scrollElementIntoViewBottom(elmnt) {
   elmnt.scrollIntoView(false); // Bottom
 }
+
+function isEmptyOrSpaces(str){
+  return str === null || str.match(/^ *$/) !== null;
+}

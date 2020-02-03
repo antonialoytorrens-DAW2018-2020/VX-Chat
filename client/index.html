@@ -30,13 +30,23 @@
 
   <nav class="navbar navbar-light bg-light fixed-top" style="height: 10%;">
     <div class="navbar-brand font-weight-bold w-100">
-      <img src="./img/vx.png" class="img-responsive" alt="VX-Chat Logo">
+      <img src="./img/vx.png" class="img-responsive img-fluid" style="max-width:100%; height: auto;" alt="VX-Chat Logo">
     </div>
   </nav>
+
+  <!--MODAL-->
+  <div id="modal" class="d-flex w-100 fixed-top justify-content-center" style="z-index: 100030;">
+    <div class="row d-flex flex-content w-25 bg-warning p-3" style="border: 1px solid black;">
+      <div class="col" id="note-messages">
+        <h6 class="font-weight-bold text-center">Message Log</h6>
+      </div>
+    </div>
+  </div>
+
   <!--SIGN IN-->
 
   <div class="container" id="pswdiv">
-    <div class="d-flex justify-content-center h-100">
+    <div class="d-flex justify-content-center h-100" id="container-content">
       <div class="card" style="display: -webkit-box;">
         <div class="card-header">
           <h3>Sign In</h3>
@@ -108,10 +118,13 @@
             Already have an account?<a id="signin">Sign In</a>
           </div>
           <div class="d-flex justify-content-center links">
-            <div id="errorUsuariRegistreDiv">Error: This username is not available.</div>
+            <div id="errorUsuariRegistreDiv">Error: Username or email cannot be blank.</div>
           </div>
           <div class="d-flex justify-content-center links">
-            <div id="errorContrasenyaRegistreDiv">Error: Wrong password.</div id="errorContrasenyaRegistreDiv">
+            <div id="errorContrasenyaRegistreDiv">Error: Wrong password.</div>
+          </div>
+          <div class="d-flex justify-content-center links">
+            <div id="errorUsuariRegistreDiv2">Error: Email is duplicated.</div>
           </div>
         </div>
       </div>
@@ -120,33 +133,31 @@
 
   <!--MESSAGE LIST-->
 
-  <div class="container" id="chatdiv">
-    <div class="d-flex justify-content-center h-75" style="flex-wrap: wrap;">
-      <div class="card">
-        <div class="card-header">
-          <h3>Xat</h3>
-        </div>
-        <div class="card-body">
-          <div id="error-message"></div>
-        </div>
-        <div class="card-body">
-          <div class="input-group form-group">
-            <textarea class="form-control" rows="2" cols="100" id="noumissatge" placeholder="Message..."
-              style="resize: none; border-radius: 0.5rem;"></textarea>
-            <div>
-              <input type="button" id="btnoumsg" class="btn btn-yellow btn-lg active align-middle" value="+">
-            </div>
-          </div>
-          <div class="input-group form-group">
-            <div id="spin" class="row">
-              <img id="volta" class="img-responsive img-center" src="./img/loading.gif" alt="">
-            </div>
-            <ul class="list-group" id="missatges">
-            </ul>
+  <div id="chatdiv" class="container d-flex justify-content-center" style="align-items: center;">
+    <div class="card d-flex flex-content">
+      <div class="card-header">
+        <h3>Xat</h3>
+      </div>
+      <div class="card-body">
+        <div id="error-message"></div>
+      </div>
+      <div class="card-body">
+        <div class="input-group form-group">
+          <textarea class="form-control" rows="2" cols="100" id="noumissatge" placeholder="Message..."
+            style="resize: none; border-radius: 0.5rem;"></textarea>
+          <div>
+            <input type="button" id="btnoumsg" class="btn btn-yellow btn-lg active align-middle" value="+">
           </div>
         </div>
-        <div class="card-footer">
+        <div class="input-group form-group">
+          <div id="spin" class="row">
+            <img id="volta" class="img-responsive img-center" src="./img/loading.gif" alt="">
+          </div>
+          <ul class="list-group" id="missatges">
+          </ul>
         </div>
+      </div>
+      <div class="card-footer">
       </div>
     </div>
   </div>
@@ -202,7 +213,7 @@
             <div class="col-xs-8 col-sm-8 col-md-8">
               <span id="nomusuari"></span>
               <p><button id="btperfil" class="btn btn-link">Perfil</button>
-              <button id="logout" class="btn btn-link">Logout</button></p>
+                <button id="logout" class="btn btn-link">Logout</button></p>
             </div>
           </form>
           <!-- Form -->
@@ -218,9 +229,9 @@
 
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">
-        <form class="input-group">
-          <select class="form-control mb-2" id="voiceOptions" style="width: 50%; flex: none; margin: auto;"></select>
-        </form>
+      <form class="input-group">
+        <select class="form-control mb-2" id="voiceOptions" style="width: 50%; flex: none; margin: auto;"></select>
+      </form>
       © 2020 Antoni Aloy Torrens:
       <a href="https://mdbootstrap.com/education/bootstrap/">VX-Chat</a>
       <p class="font-weight-bold">The International Chat for Everyone</p>
