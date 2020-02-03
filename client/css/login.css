@@ -64,16 +64,3 @@ color: rgb(0, 0, 0);
 .links a{
 margin-left: 4px;
 }
-
-.extra-text-show {
-    display: none;
-}
-
-@media (max-width: 470px) {
-    #extra-text-hide {
-        display: none;
-    }
-    .extra-text-show {
-        display: inline;
-    }
-}

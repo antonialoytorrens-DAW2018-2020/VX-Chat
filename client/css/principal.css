@@ -1,7 +1,7 @@
 .img-center {
     margin: 0 auto;
 }    
-#errorlogindiv, #errorUsuariRegistreDiv, #errorContrasenyaRegistreDiv{
+#errorlogindiv, #errorUsuariRegistreDiv, #errorContrasenyaRegistreDiv, #error-message{
 	color: #ce2700;
 	font-family: Open Sans;
 	font-weight: bold;    
@@ -9,4 +9,15 @@
 
 html, body {
 	height: 100%;
+}
+
+#noumissatge {
+	padding: .5 rem 1 rem;
+}
+
+.d-flex .justify-content-center .h-100 {
+  width: 50px;
+  border: 1px solid #c3c3c3;
+  display: flex;
+  flex-wrap: wrap;
 }

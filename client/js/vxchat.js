@@ -164,6 +164,18 @@ function validaLogin_fer(rq) {
           enviaMissatge(rq);
         });
 
+        // Envia missatge quan es prem ENTER al textarea
+
+        document.getElementById("noumissatge").addEventListener("keypress", function (e) {
+          var keyCode = e.keyCode;
+          // Tecla ENTER i l'element està seleccionat
+          var isFocused = (document.activeElement === this);
+          if (isFocused && keyCode == 13) {
+            var rq = agafaObjecte();
+            enviaMissatge(rq);
+          }
+        });
+
         mostraSpin();
         carregaMissatges(rq);
         //interval = setInterval(carregaMissatges, mlsg);
@@ -177,35 +189,109 @@ function validaLogin_fer(rq) {
   }
 }
 
-function actualitzaMissatge(codiusuari, msg) {
-    var llistaMissatges = document.getElementById("missatges");
-    var darrerMissatge = llistaMissatges.lastElementChild.innerHTML;
+function creaBlocMissatge(datahora, codiusuari, nom, codimissatge, missatge) {
+  // CODI USUARI
+  var codiUsuariActual = document.getElementById("codiusuari").value;
+  // CONTENIDOR
+  var msg = document.getElementById('missatges');
+
+  // FILA
+
+  var fila = document.createElement("li");
+  fila.setAttribute('class', 'list-group-item');
+  if (codiusuari == codiUsuariActual) {
+    fila.setAttribute('style', 'background-color:#ccffff');
+  } else {
+    fila.setAttribute('style', 'background-color:#ccffcc');
+  }
+
+  // INFO MISSATGE
+
+  var span = document.createElement("span");
+  span.setAttribute('style', 'font-size:9px');
+  span.setAttribute('class', 'badge');
+  span.innerHTML = formataData(datahora) + ' ' + nom;
+  fila.appendChild(span);
+
+  // foto
+  /*
+  if (json[i].foto!=''){
+   var img=document.createElement("img");
+   img.setAttribute('height','50');
+   img.setAttribute('class','rounded-circle z-depth-2');
+   img.setAttribute('src',json[i].foto);
+   img.setAttribute('data-holder-rendered',true);
+   fila.appendChild(img);
+  }*/
+
+  // CONTINGUT DEL MISSATGE
+
+  var p = document.createElement("p");
+  p.setAttribute('style', 'font-size:14px');
+  p.setAttribute('id', 'missatge' + codimissatge);
+  p.innerHTML = missatge;
+  fila.appendChild(p);
+
+  // SPEECH AUDIO
+
+  var buttonVolumeUp = document.createElement("button");
+  buttonVolumeUp.setAttribute("type", "button");
+  buttonVolumeUp.setAttribute("class", "btn btn-light float-right");
+  buttonVolumeUp.setAttribute('id', 'audiomissatge-' + codimissatge);
+
+  var volumeUp = document.createElement("i");
+  volumeUp.setAttribute('class', 'fa fa-volume-up');
+  volumeUp.setAttribute('aria-hidden', 'true');
+
+  buttonVolumeUp.appendChild(volumeUp);
+  fila.appendChild(buttonVolumeUp);
+
+  // SPEECH AUDIO EVENT LISTENER
+
+  buttonVolumeUp.addEventListener("click", function () {
+    let boto = this.id;
+    var idBoto = boto.split("-")[1];
+    let missatge = document.getElementById('missatge' + idBoto).textContent;
+    speak(missatge);
+  });
+
+  // AFEGIR FILA AL CONTENIDOR
+  msg.insertBefore(fila, msg.childNodes[0]);
 }
 
 function enviaMissatge(rq) {
   var msg = document.getElementById('noumissatge').value;
   var codiusuari = document.getElementById('codiusuari').value;
   rq.open("POST", URL_ENVIAMISSATGE, true);
-  rq.onreadystatechange = function () { actualitzaMissatge(codiusuari, msg); };
+  rq.onreadystatechange = function () { enviaMissatge_mostra(rq); };
   rq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   var token = document.getElementById('token').value;
   rq.setRequestHeader('Authorization', token);
   rq.send("codiusuari=" + codiusuari + "&msg=" + msg);
+
 }
 
-function enviaMissatge_mostra(rq, msg) {
-  if (rq.readyState == 4) {
-    var msg = document.getElementById('noumissatge');
-    if (rq.status == 200) {
-      mostraMissatges(rq);
-      msg.value = '';
-    } else {
-      msg.innerHTML = 'Error enviant missatge ';
-    }
+function enviaMissatge_mostra(rq) {
+  var msg = document.getElementById('noumissatge');
+  if (rq.readyState == 4 && rq.status == 200) {
+    var resposta = JSON.parse(rq.responseText);
+    var json = resposta.dades;
+    let datahora = json[0].datahora;
+    let codiusuari = json[0].codiusuari;
+    let nom = json[0].nom;
+    let codimissatge = json[0].codimissatge;
+    let missatge = json[0].msg;
+    creaBlocMissatge(datahora, codiusuari, nom, codimissatge, missatge);
+    msg.value = '';
+    document.getElementById("error-message").innerHTML = '';
+  } else {
+    msg = document.getElementById("error-message");
+    msg.innerHTML = 'Error sending message. Try again later.';
   }
 }
 
 function carregaMissatges(rq) {
+  document.getElementById("missatges").innerHTML = '';
   rq.onreadystatechange = function () { mostraMissatges(rq); };
   rq.open("GET", URL_LLEGIR, true);
   var token = document.getElementById('token').value;
@@ -227,10 +313,8 @@ function mostraMissatges(rq) {
   //var token = document.getElementById('token').value;
   //rq.setRequestHeader('Authorization', token);
   //rq.send(null);
-  var codiUsuariActual = document.getElementById("codiusuari").value;
 
   if (rq.readyState == 4 && rq.status == 200) {
-    var msg = document.getElementById('missatges');
     var resposta = JSON.parse(rq.responseText);
     // Sessió no iniciada
     if (!resposta.correcta) {
@@ -239,64 +323,19 @@ function mostraMissatges(rq) {
     else {
       var json = resposta.dades;
       for (i in json) {
-        var fila = document.createElement("li");
-        fila.setAttribute('class', 'list-group-item');
-        if (json[i].codiusuari == codiUsuariActual) {
-          fila.setAttribute('style', 'background-color:#ccffff');
-        } else {
-          fila.setAttribute('style', 'background-color:#ccffcc');
-        }
-        var span = document.createElement("span");
-        span.setAttribute('style', 'font-size:9px');
-        span.setAttribute('class', 'badge');
-        span.innerHTML = formataData(json[i].datahora) + ' ' + json[i].nom;
-        fila.appendChild(span);
-        // foto
-        /*
-        if (json[i].foto!=''){
-         var img=document.createElement("img");
-         img.setAttribute('height','50');
-         img.setAttribute('class','rounded-circle z-depth-2');
-         img.setAttribute('src',json[i].foto);
-         img.setAttribute('data-holder-rendered',true);
-         fila.appendChild(img);
-        }*/
-        //
-        var p = document.createElement("p");
-        p.setAttribute('style', 'font-size:14px');
-        p.setAttribute('id', 'missatge' + json[i].codimissatge);
-        p.innerHTML = json[i].msg;
-        fila.appendChild(p);
-
-        msg.appendChild(fila);
-
-        // SPEECH AUDIO
-        var buttonVolumeUp = document.createElement("button");
-        buttonVolumeUp.setAttribute("type", "button");
-        buttonVolumeUp.setAttribute("class", "btn btn-light float-right");
-        buttonVolumeUp.setAttribute('id', 'audiomissatge-' + json[i].codimissatge);
-
-        var volumeUp = document.createElement("i");
-        volumeUp.setAttribute('class', 'fa fa-volume-up');
-        volumeUp.setAttribute('aria-hidden', 'true');
-
-        buttonVolumeUp.appendChild(volumeUp);
-        fila.appendChild(buttonVolumeUp);
-
-        buttonVolumeUp.addEventListener("click", function () {
-          let boto = this.id;
-          var idBoto = boto.split("-")[1];
-          let missatge = document.getElementById('missatge' + idBoto).textContent;
-          speak(missatge);
-        });
-        // MOSTRA EL TEXTAREA PER ENVIAR UN NOU MISSATGE
-        // scrollElementIntoViewBottom(document.getElementById("noumissatge"));
+        let datahora = json[i].datahora;
+        let codiusuari = json[i].codiusuari;
+        let nom = json[i].nom;
+        let codimissatge = json[i].codimissatge;
+        let missatge = json[i].msg;
+        creaBlocMissatge(datahora, codiusuari, nom, codimissatge, missatge);
       }
-      document.getElementById('noumissatge').innerHTML='';
+      document.getElementById('noumissatge').innerHTML = '';
       ocultaSpin();
     }
   } else {
     if (rq.status != 200) {
+      var msg = document.getElementById('error-message');
       var msg = document.getElementById('noumissatge');
       msg.innerHTML = 'Error loading messages';
       ocultaSpin();

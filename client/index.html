@@ -28,22 +28,13 @@
 
   <!--MENU-->
 
-  <nav class="navbar navbar-light bg-light" style="height: 10%;">
-    <div class="navbar-brand font-weight-bold w-100 float-left">
-      <img src="./img/vx.png" class="d-inline-block img-fluid" alt="VX-Chat Logo">
-      <span class="text-center align-top">VX-Chat<span id="extra-text-hide"> - The International Chat for
-          Everyone</span></span>
-      <span class="extra-text-show text-center align-top">The International Chat</span><br />
-      <span class="extra-text-show text-center align-top">for Everyone</span>
-      <div class="col-xs-8 col-sm-8 col-md-8" id="logindiv">
-        <span id="nomusuari"></span>&nbsp;&nbsp;&nbsp;<button id="btperfil" class="btn btn-link">Perfil</button>
-        <button id="logout" class="btn btn-link">Logout</button>
-      </div>
+  <nav class="navbar navbar-light bg-light fixed-top" style="height: 10%;">
+    <div class="navbar-brand font-weight-bold w-100">
+      <img src="./img/vx.png" class="img-responsive" alt="VX-Chat Logo">
     </div>
   </nav>
-
   <!--SIGN IN-->
-  
+
   <div class="container" id="pswdiv">
     <div class="d-flex justify-content-center h-100">
       <div class="card" style="display: -webkit-box;">
@@ -123,71 +114,121 @@
             <div id="errorContrasenyaRegistreDiv">Error: Wrong password.</div id="errorContrasenyaRegistreDiv">
           </div>
         </div>
-        </div>
       </div>
     </div>
+  </div>
 
-    <!--MESSAGE LIST-->
+  <!--MESSAGE LIST-->
 
-    <div class="container col-xs-12 col-sm-8 col-md-6 h-100" id="chatdiv">
-      <div class="col-xs-8 col-sm-8 col-md-8" <span id="nomusuari"></span>&nbsp;&nbsp;&nbsp;<label><select
-            id="voiceOptions"></select>
-      </div>
-
-
-      <ul class="list-group" id="missatges">
-      </ul>
-
-
-      <div id="spin" class="row">
-        <img id="volta" class="img-responsive img-center" src="./img/loading.gif" alt="">
-      </div>
-
-      <div class="panel panel-default col-xs-12 col-sm-12 col-md-12">
-        <div class="panel-footer">
-          <div class="row">
-            <div class="col-xs-9 col-sm-9 col-md-9"><textarea class="form-control" rows="3" cols="100"
-                id="noumissatge"></textarea></div>
-            <div class="col-xs-2 col-sm-2 col-md-2"><input type="button" id="btnoumsg"
-                class="btn btn-yellow btn-lg active" value="+"></div>
+  <div class="container" id="chatdiv">
+    <div class="d-flex justify-content-center h-75" style="flex-wrap: wrap;">
+      <div class="card">
+        <div class="card-header">
+          <h3>Xat</h3>
+        </div>
+        <div class="card-body">
+          <div id="error-message"></div>
+        </div>
+        <div class="card-body">
+          <div class="input-group form-group">
+            <textarea class="form-control" rows="2" cols="100" id="noumissatge" placeholder="Message..."
+              style="resize: none; border-radius: 0.5rem;"></textarea>
+            <div>
+              <input type="button" id="btnoumsg" class="btn btn-yellow btn-lg active align-middle" value="+">
+            </div>
+          </div>
+          <div class="input-group form-group">
+            <div id="spin" class="row">
+              <img id="volta" class="img-responsive img-center" src="./img/loading.gif" alt="">
+            </div>
+            <ul class="list-group" id="missatges">
+            </ul>
           </div>
         </div>
-
-      </div>
-    </div>
-
-<!--PROFILE-->
-
-    <div class="container col-xs-12 col-sm-8 col-md-6" id="perfildiv">
-      <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-6">
-          <label for="perfilnom">Nom</label><input type="text" class="form-control" id="perfilnom" name="PERFILNOM">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-6">
-          <label for="perfilemail">Email</label><input type="text" class="form-control" id="perfilemail"
-            name="PERFILEMAIL">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-6"><label for="perfilpsw">Password</label><input type="password"
-            class="form-control" id="perfilpsw" name="PERFILPSW"></div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-6"><label for="perfilfoto">Foto</label><input type="file"
-            class="form-control" id="perfilfoto" name="PERFILFOTO"></div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-6">&nbsp;</div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-6">
-          <input type="button" id="btperfilguarda" class="btn btn-primary btn-lg active" value="Guarda">
-          <input type="button" id="btperfilcancela" class="btn btn-info btn-lg" value="Cancel·la">
+        <div class="card-footer">
         </div>
       </div>
     </div>
+  </div>
+
+  <!--PROFILE-->
+
+  <div class="container col-xs-12 col-sm-8 col-md-6" id="perfildiv">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-6">
+        <label for="perfilnom">Nom</label><input type="text" class="form-control" id="perfilnom" name="PERFILNOM">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-6">
+        <label for="perfilemail">Email</label><input type="text" class="form-control" id="perfilemail"
+          name="PERFILEMAIL">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-6"><label for="perfilpsw">Password</label><input type="password"
+          class="form-control" id="perfilpsw" name="PERFILPSW"></div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-6"><label for="perfilfoto">Foto</label><input type="file"
+          class="form-control" id="perfilfoto" name="PERFILFOTO"></div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-6">&nbsp;</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-6">
+        <input type="button" id="btperfilguarda" class="btn btn-primary btn-lg active" value="Guarda">
+        <input type="button" id="btperfilcancela" class="btn btn-info btn-lg" value="Cancel·la">
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="page-footer font-small special-color-dark pt-4 fixed-bottom bg-light" style="z-index: 1030; ">
+
+    <!-- Footer Elements -->
+    <div class="container">
+
+      <!--Grid row-->
+      <div class="row" id="logindiv">
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+          <!-- Form -->
+          <form class="form-inline">
+            <!--USER SETTINGS-->
+
+            <div class="col-xs-8 col-sm-8 col-md-8">
+              <span id="nomusuari"></span>
+              <p><button id="btperfil" class="btn btn-link">Perfil</button>
+              <button id="logout" class="btn btn-link">Logout</button></p>
+            </div>
+          </form>
+          <!-- Form -->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+    <!-- Footer Elements -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">
+        <form class="input-group">
+          <select class="form-control mb-2" id="voiceOptions" style="width: 50%; flex: none; margin: auto;"></select>
+        </form>
+      © 2020 Antoni Aloy Torrens:
+      <a href="https://mdbootstrap.com/education/bootstrap/">VX-Chat</a>
+      <p class="font-weight-bold">The International Chat for Everyone</p>
+    </div>
+    <!-- Copyright -->
+
+  </footer>
+  <!-- Footer -->
 </body>
 <!--Speech Converter-->
 <script src="./js/speechConverter.js"></script>
