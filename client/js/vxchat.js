@@ -127,6 +127,7 @@ function afegeixUsuari(rq) {
           var note_message = document.getElementById('note_message');
           note_message.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><b>User created successfully.</b>';
           showIt(document.getElementById("modal"));
+          carregaInici();
         }
       }
     };
@@ -186,6 +187,7 @@ function validaLogin_fer(rq) {
         document.getElementById('pswdiv').setAttribute("style", "display: none");
         var chatdiv = document.getElementById('chatdiv');
         chatdiv.setAttribute("style", "display: block");
+        document.getElementById("error-message-container").setAttribute("style", "display: none;");
         fadeIn(chatdiv, 1000);
         var logindiv = document.getElementById('logindiv');
         logindiv.setAttribute("style", "display: block");
@@ -392,6 +394,7 @@ function enviaMissatge_mostra(rq) {
   } else {
     msg = document.getElementById("error-message");
     msg.innerHTML = 'Error sending message. Try again later.';
+    document.getElementById("error-message-container").setAttribute("style", "display: block;");
   }
 }
 
@@ -482,11 +485,11 @@ function resultatPerfil(rq) {
 
 
 function ocultaSpin() {
-  document.getElementById('spin').style.visibility = 'hidden';
+  document.getElementById('spin').setAttribute("style", "display: none");
 }
 
 function mostraSpin() {
-  document.getElementById('spin').style.visibility = 'visible';
+  document.getElementById('spin').setAttribute("style", "display: block");
 }
 
 function setCookie(cname, cvalue, exdays) {
