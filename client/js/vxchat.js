@@ -127,6 +127,10 @@ function afegeixUsuari(rq) {
           var note_message = document.getElementById('note_message');
           note_message.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><b>User created successfully.</b>';
           showIt(document.getElementById("modal"));
+          document.getElementById('nom-registre').innerHTML = '';
+          document.getElementById('email-registre').innerHTML = '';
+          document.getElementById('psw-registre').innerHTML = '';
+          document.getElementById('psw-registre2').innerHTML = '';
           carregaInici();
         }
       }
