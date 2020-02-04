@@ -53,7 +53,8 @@ class Missatge
     public function enviarmissatge($codiusuari, $text) {
         try {
             $result = array();
-            $stm = $this->conn->prepare("INSERT INTO missatge (codiusuari, msg) VALUES ('$codiusuari', '$text')");
+            $textmessage = htmlspecialchars(mysqli_escape_string($this->conn, $text));
+            $stm = $this->conn->prepare("INSERT INTO missatge (codiusuari, msg) VALUES ('$codiusuari', '$textmessage')");
             $stm->execute();
             $this->resposta->setCorrecta(true);
 
@@ -76,6 +77,21 @@ class Missatge
             $stm = $this->conn->prepare("UPDATE INTO missatge SET darrermissatge='$codimissatge' WHERE codiusuari='$codiusuari')");
             $stm->execute();
             $this->resposta->setCorrecta(true);       // La resposta es correcta
+        } catch (Exception $e) {   // hi ha un error posam la resposta a fals i tornam missatge d'error
+            $this->resposta->setCorrecta(false, $e->getMessage());
+            return $this->resposta;
+        }
+    }
+
+    public function construeixGrafic() {
+        try {
+            $result = array();
+            $stm = $this->conn->prepare("SELECT nom, COUNT(codimissatge) AS numeromissatges FROM missatge INNER JOIN usuari ON missatge.codiusuari = usuari.codiusuari GROUP BY nom ORDER BY numeromissatges DESC LIMIT 20");
+            $stm->execute();
+            $tuples = $stm->fetchAll();
+            $this->resposta->setDades($tuples);    // array de tuples
+            $this->resposta->setCorrecta(true);       // La resposta es correcta
+            return $this->resposta;
         } catch (Exception $e) {   // hi ha un error posam la resposta a fals i tornam missatge d'error
             $this->resposta->setCorrecta(false, $e->getMessage());
             return $this->resposta;
