@@ -13,7 +13,7 @@ class Database {
   
   private function __construct() {
     $this->pdo = new PDO("mysql:host={$this->host}; dbname={$this->dbname}", $this->user,$this->pass,
-                                    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+                                    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'"));
     $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);        // activam excepcions
     $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);     // per defecte fetch object                                                        
   }

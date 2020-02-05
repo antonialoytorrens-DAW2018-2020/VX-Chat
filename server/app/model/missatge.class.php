@@ -53,7 +53,7 @@ class Missatge
     public function enviarmissatge($codiusuari, $text) {
         try {
             $result = array();
-            $textmessage = htmlspecialchars(mysqli_escape_string($this->conn, $text));
+            $textmessage = htmlspecialchars($text);
             $stm = $this->conn->prepare("INSERT INTO missatge (codiusuari, msg) VALUES ('$codiusuari', '$textmessage')");
             $stm->execute();
             $this->resposta->setCorrecta(true);

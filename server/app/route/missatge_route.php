@@ -1,7 +1,6 @@
 <?php
 
 use App\Model\Missatge;
-use App\Model\Usuari;
 
 $app->group('/missatge/', function () {
     $this->get('', function ($req, $res, $args) {

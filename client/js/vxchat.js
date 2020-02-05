@@ -2,6 +2,7 @@ const scripts = document.getElementsByTagName('script');
 const path = scripts[scripts.length - 1].src.split('?')[0];
 const mydir = path.split('/').slice(0, -1).join('/') + '/';
 const URL_LOGIN = mydir + "../../server/public/login/";
+const URL_GRAFIC = mydir + "../../server/public/grafic/";
 const URL_ENVIAMISSATGE = mydir + "../../server/public/missatge/";
 const URL_LLEGIR = mydir + "../../server/public/missatge/";
 const URL_PERFIL = mydir + "../../server/public/usuari/";
@@ -22,9 +23,10 @@ function carregaInici() {
   document.getElementById('pswdiv').setAttribute("style", "display: block");
   document.getElementById('pswregistre').setAttribute("style", "display: none");
   document.getElementById('chatdiv').setAttribute("style", "display: none !important");
-  document.getElementById('logindiv').setAttribute("style", "display: none");
+  document.getElementById('logindiv').setAttribute("style", "display: none !important");
   document.getElementById('perfildiv').setAttribute("style", "display: none");
   document.getElementById('errorlogindiv').setAttribute("style", "display: none");
+  document.getElementById('graphicdiv').setAttribute("style", "display: none");
   document.getElementById('nom').value = getCookie(nomgalleta);
   document.getElementById('psw').value = getCookie(pswgalleta);
 
@@ -72,7 +74,7 @@ function registreUsuari() {
   registre.setAttribute("style", "display: block");
   fadeIn(registre, 1000);
   document.getElementById('chatdiv').setAttribute("style", "display: none !important");
-  document.getElementById('logindiv').setAttribute("style", "display: none");
+  document.getElementById('logindiv').setAttribute("style", "display: none !important");
   document.getElementById('perfildiv').setAttribute("style", "display: none");
   document.getElementById('errorlogindiv').setAttribute("style", "display: none");
 
@@ -125,7 +127,7 @@ function afegeixUsuari(rq) {
           document.getElementById('errorUsuariRegistreDiv2').setAttribute("style", "display: block");
         } else {
           var note_message = document.getElementById('note_message');
-          note_message.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><b>User created successfully.</b>';
+          note_message.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><b>User has been created.</b>';
           showIt(document.getElementById("modal"));
           document.getElementById('nom-registre').innerHTML = '';
           document.getElementById('email-registre').innerHTML = '';
@@ -196,10 +198,15 @@ function validaLogin_fer(rq) {
         var logindiv = document.getElementById('logindiv');
         logindiv.setAttribute("style", "display: block");
         var boto = document.getElementById('btnoumsg');
+        var boto_graphic = document.getElementById('btgraphic');
 
         boto.addEventListener("click", function () {
           var rq = agafaObjecte();
           enviaMissatge(rq);
+        });
+
+        document.getElementById('nomusuari').addEventListener("click", function() {
+          carregaDropdown();
         });
 
         // Envia missatge quan es prem ENTER al textarea
@@ -220,11 +227,28 @@ function validaLogin_fer(rq) {
         document.getElementById("logout").addEventListener("click", function () {
           carregaInici();
         });
+        boto_graphic.addEventListener("click", function() {
+          var rq = agafaObjecte();
+          construeixGrafic(rq);
+          veureGrafic();
+        });
       } else {
         document.getElementById('errorlogindiv').setAttribute("style", "display: initial");
       }
     }
   }
+}
+
+function construeixGrafic(rq) {
+  rq.onreadystatechange = function () { creaGrafic(rq); };
+  rq.open("POST", URL_GRAFIC, true);
+  rq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  rq.send(null);
+}
+
+function veureGrafic() {
+  document.getElementById('chatdiv').setAttribute("style", "display: none !important");
+  document.getElementById('graphicdiv').setAttribute("style", "display: flex");
 }
 
 function creaBlocMissatge(datahora, codiusuari, nom, codimissatge, missatge) {
@@ -274,8 +298,10 @@ function creaBlocMissatge(datahora, codiusuari, nom, codimissatge, missatge) {
 
   var buttonVolumeUp = document.createElement("button");
   buttonVolumeUp.setAttribute("type", "button");
-  buttonVolumeUp.setAttribute("class", "btn btn-light float-right");
+  buttonVolumeUp.setAttribute("class", "btn btn-warning float-right border border-dark");
   buttonVolumeUp.setAttribute('id', 'audiomissatge-' + codimissatge);
+  buttonVolumeUp.setAttribute('title', "Listen to audio");
+  buttonVolumeUp.classList.add('red-focus-within');
 
   var volumeUp = document.createElement("i");
   volumeUp.setAttribute('class', 'fa fa-volume-up');
@@ -344,8 +370,10 @@ function creaBlocMissatge2(datahora, codiusuari, nom, codimissatge, missatge) {
 
   var buttonVolumeUp = document.createElement("button");
   buttonVolumeUp.setAttribute("type", "button");
-  buttonVolumeUp.setAttribute("class", "btn btn-light float-right");
+  buttonVolumeUp.setAttribute("class", "btn btn-warning float-right border border-dark");
   buttonVolumeUp.setAttribute('id', 'audiomissatge-' + codimissatge);
+  buttonVolumeUp.setAttribute('title', "Listen to audio");
+  buttonVolumeUp.classList.add('red-focus-within');
 
   var volumeUp = document.createElement("i");
   volumeUp.setAttribute('class', 'fa fa-volume-up');
@@ -392,8 +420,9 @@ function enviaMissatge_mostra(rq) {
     creaBlocMissatge2(datahora, codiusuari, nom, codimissatge, missatge);
     msg.value = '';
     document.getElementById("error-message").innerHTML = '';
+    document.getElementById("error-message-container").setAttribute("style", "display: none;");
     let note_message = document.getElementById("note_message");
-    note_message.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><b>Message sent successfully.</b>';
+    note_message.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><b>Message sent.</b>';
     showIt(document.getElementById("modal"));
   } else {
     msg = document.getElementById("error-message");
@@ -490,10 +519,12 @@ function resultatPerfil(rq) {
 
 function ocultaSpin() {
   document.getElementById('spin').setAttribute("style", "display: none");
+  document.getElementById('volta').setAttribute("style", "display: none");
 }
 
 function mostraSpin() {
   document.getElementById('spin').setAttribute("style", "display: block");
+  document.getElementById('volta').setAttribute("style", "display: block");
 }
 
 function setCookie(cname, cvalue, exdays) {

@@ -33,6 +33,10 @@ body {
   display: none !important;
 }
 
+.red-focus-within:focus-within {
+  background: rgb(219, 44, 13);
+}
+
 @media(max-height: 650px) {
   footer {
     display: fixed;
