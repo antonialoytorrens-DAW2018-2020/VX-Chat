@@ -457,7 +457,7 @@ function enviaMissatge_mostra(rq) {
     note_message.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><b>Message sent.</b>';
     showIt(document.getElementById("modal"));
     responsiveVoice.speak("Message sent successfully");
-  } else {
+  } else if(rq.readyState == 4 && rq.status != 200){
     msg = document.getElementById("error-message");
     msg.innerHTML = 'Error sending message. Try again later.';
     document.getElementById("error-message-container").setAttribute("style", "display: block;");
