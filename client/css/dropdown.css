@@ -13,7 +13,7 @@
     margin: 0;
     padding: 0;
     display:flex;
-    background-color: #036;
+    background-color: transparent;
     color: #fff;
 }
 #flyoutnavkbbtn > ul > li {
@@ -30,15 +30,15 @@
     border-color: #E8E8E8;
 }
 #flyoutnavkbbtn a {
-    color: #fff;
+    color: transparent;
     text-decoration: none;
-    border: 1px solid #036;
+    border: 1px solid transparent;
 }
 #flyoutnavkbbtn a:hover,
 #flyoutnavkbbtn a:focus {
     background-color: #fff;
-    color: #036;
-    border: 1px solid #036;
+    color: transparent;
+    border: 1px solid transparent;
     text-decoration: underline;
 }
 #flyoutnavkbbtn .current {
@@ -55,7 +55,7 @@
   top:100%;
   padding:0;
   margin:0;
-  background-color: #036;
+  background-color: transparent;
 }
 
 #flyoutnavkbbtn > ul > li.open > ul {
@@ -83,26 +83,13 @@
   padding: 3px;
 }
 
- #flyoutnavkbbtn .has-submenu button > span {
-  display:inline-block;
-  width: .8em;
-  height: .8em;
-  background: url(../../img/ex-dropdown-inactive-2084a51c.png) center no-repeat;
-}
-
-#flyoutnavkbbtn .has-submenu:hover button > span,
-#flyoutnavkbbtn .has-submenu button:focus > span {
-  background: url(../../img/ex-dropdown-active-330d8be7.png) #fff;
-}
 
 #flyoutnavkbbtn .has-submenu button,
 #flyoutnavkbbtn .has-submenu a:focus + button {
-  background-color: #036;
+  background-color: transparent;
 }
-#flyoutnavkbbtn .has-submenu:hover button,
-#flyoutnavkbbtn .has-submenu button:hover,
-#flyoutnavkbbtn .has-submenu button:focus {
+#flyoutnavkbbtn .has-submenu:hover button {
   background: #FFF;
-  border: 1px solid #036;
+  border: 1px solid transparent;
   border-left: none;
 }

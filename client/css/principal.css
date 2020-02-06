@@ -34,7 +34,21 @@ body {
 }
 
 .red-focus-within:focus-within {
-  background: rgb(219, 44, 13);
+  background: #FF3333;
+}
+
+#register, #signin {
+	background: none;
+	color: #0056b3;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+  outline: inherit;
+}
+
+#register:hover, #register:focus, #signin:hover, #signin:focus {
+  text-decoration: underline;
 }
 
 @media(max-height: 650px) {

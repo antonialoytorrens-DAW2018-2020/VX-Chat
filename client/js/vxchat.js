@@ -29,6 +29,8 @@ function carregaInici() {
   document.getElementById('graphicdiv').setAttribute("style", "display: none");
   document.getElementById('nom').value = getCookie(nomgalleta);
   document.getElementById('psw').value = getCookie(pswgalleta);
+  
+  carregaOnFocusElements();
 
   document.getElementById("nom").addEventListener("change", function () {
     posaGalleta();
@@ -45,8 +47,14 @@ function carregaInici() {
     editaperfil();
   });
 
+  document.getElementById('btchat').addEventListener("click", function(){
+    var rq = agafaObjecte();
+    carregaXat(rq);
+  });
+
   document.getElementById('btperfilcancela').addEventListener("click", function () {
-    editamissatges();
+    var rq = agafaObjecte();
+    carregaXat(rq);
   });
 
   document.getElementById('btperfilguarda').addEventListener("click", function () {
@@ -62,9 +70,11 @@ function carregaInici() {
   registre.addEventListener("click", function () {
     registreUsuari();
   });
+  responsiveVoice.speak("You are in the sign in section");
 }
 
 function registreUsuari() {
+  responsiveVoice.speak("You are in the sign up section");
   let registre = document.getElementById('pswregistre');
   document.getElementById('pswdiv').setAttribute("style", "display: none");
   document.getElementById('chatdiv').setAttribute("style", "display: none !important");
@@ -99,6 +109,7 @@ function afegeixUsuari(rq) {
 
   if (psw != psw2) {
     document.getElementById("errorContrasenyaRegistreDiv").setAttribute("style", "display: block;");
+    responsiveVoice.speak(document.getElementById("errorContrasenyaRegistreDiv").textContent);
   } else {
     document.getElementById("errorContrasenyaRegistreDiv").setAttribute("style", "display: none;");
   }
@@ -107,6 +118,7 @@ function afegeixUsuari(rq) {
 
   if (isEmptyOrSpaces(nom) || isEmptyOrSpaces(email)) {
     document.getElementById("errorUsuariRegistreDiv").setAttribute("style", "display: block;");
+    responsiveVoice.speak(document.getElementById("errorUsuariRegistreDiv").textContent);
   } else {
     document.getElementById("errorUsuariRegistreDiv").setAttribute("style", "display: none;");
   }
@@ -125,6 +137,7 @@ function afegeixUsuari(rq) {
         var resposta = JSON.parse(rq.responseText);
         if (resposta.correcta == false) {
           document.getElementById('errorUsuariRegistreDiv2').setAttribute("style", "display: block");
+          responsiveVoice.speak(document.getElementById('errorUsuariRegistreDiv2').textContent);
         } else {
           var note_message = document.getElementById('note_message');
           note_message.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><b>User has been created.</b>';
@@ -141,17 +154,13 @@ function afegeixUsuari(rq) {
 }
 
 function editaperfil() {
+  responsiveVoice.speak("You are in the profile section");
   document.getElementById('pswdiv').setAttribute("style", "display: none");
   document.getElementById('chatdiv').setAttribute("style", "display: none !important");
   document.getElementById('perfildiv').setAttribute("style", "display: block");
+  document.getElementById('graphicdiv').setAttribute("style", "display: none");
   document.getElementById('perfilnom').value = document.getElementById('nom_usuari').value;
   document.getElementById('perfilemail').value = document.getElementById('email_usuari').value;
-}
-
-function editamissatges() {
-  document.getElementById('pswdiv').setAttribute("style", "display: none");
-  document.getElementById('chatdiv').setAttribute("style", "display: initial");
-  document.getElementById('perfildiv').setAttribute("style", "display: none");
 }
 
 function agafaObjecte() {
@@ -190,53 +199,63 @@ function validaLogin_fer(rq) {
         document.getElementById('email_usuari').value = emailusuari;
         var token = dades.token;
         document.getElementById('token').value = token;
-        document.getElementById('pswdiv').setAttribute("style", "display: none");
-        var chatdiv = document.getElementById('chatdiv');
-        chatdiv.setAttribute("style", "display: block");
-        document.getElementById("error-message-container").setAttribute("style", "display: none;");
-        fadeIn(chatdiv, 1000);
-        var logindiv = document.getElementById('logindiv');
-        logindiv.setAttribute("style", "display: block");
-        var boto = document.getElementById('btnoumsg');
-        var boto_graphic = document.getElementById('btgraphic');
-
-        boto.addEventListener("click", function () {
-          var rq = agafaObjecte();
-          enviaMissatge(rq);
-        });
-
-        document.getElementById('nomusuari').addEventListener("click", function() {
-          carregaDropdown();
-        });
-
-        // Envia missatge quan es prem ENTER al textarea
-
-        document.getElementById("noumissatge").addEventListener("keypress", function (e) {
-          var keyCode = e.keyCode;
-          // Tecla ENTER i l'element està seleccionat
-          var isFocused = (document.activeElement === this);
-          if (isFocused && keyCode == 13) {
-            var rq = agafaObjecte();
-            enviaMissatge(rq);
-          }
-        });
-
-        mostraSpin();
-        carregaMissatges(rq);
-        //interval = setInterval(carregaMissatges, mlsg);
-        document.getElementById("logout").addEventListener("click", function () {
-          carregaInici();
-        });
-        boto_graphic.addEventListener("click", function() {
-          var rq = agafaObjecte();
-          construeixGrafic(rq);
-          veureGrafic();
-        });
+        carregaXat(rq);
       } else {
         document.getElementById('errorlogindiv').setAttribute("style", "display: initial");
+        responsiveVoice.speak(document.getElementById("errorlogindiv").textContent);
       }
     }
   }
+}
+
+function carregaXat(rq) {
+  responsiveVoice.speak("You are in the message section");
+  document.getElementById('pswdiv').setAttribute("style", "display: none");
+  document.getElementById('perfildiv').setAttribute("style", "display: none");
+  document.getElementById('graphicdiv').setAttribute("style", "display: none");
+  var chatdiv = document.getElementById('chatdiv');
+  chatdiv.setAttribute("style", "display: block");
+  document.getElementById("error-message-container").setAttribute("style", "display: none;");
+  fadeIn(chatdiv, 1000);
+  var logindiv = document.getElementById('logindiv');
+  logindiv.setAttribute("style", "display: block");
+  var boto = document.getElementById('btnoumsg');
+  var boto_graphic = document.getElementById('btgraphic');
+
+  carregaDropdown();
+
+  boto.addEventListener("click", function () {
+    var rq = agafaObjecte();
+    enviaMissatge(rq);
+  });
+
+  document.getElementById('nomusuari').addEventListener("click", function () {
+    carregaDropdown();
+  });
+
+  // Envia missatge quan es prem ENTER al textarea. S'envien molts missatges a la vegada?
+
+  /*document.getElementById("noumissatge").addEventListener("keypress", function (e) {
+    var keyCode = e.keyCode;
+    // Tecla ENTER i l'element està seleccionat
+    var isFocused = (document.activeElement === this);
+    if (isFocused && keyCode == 13) {
+      var rq = agafaObjecte();
+      enviaMissatge(rq);
+    }
+  });*/
+
+  mostraSpin();
+  carregaMissatges(rq);
+  //interval = setInterval(carregaMissatges, mlsg);
+  document.getElementById("logout").addEventListener("click", function () {
+    carregaInici();
+  });
+  boto_graphic.addEventListener("click", function () {
+    var rq = agafaObjecte();
+    construeixGrafic(rq);
+    veureGrafic();
+  });
 }
 
 function construeixGrafic(rq) {
@@ -247,7 +266,10 @@ function construeixGrafic(rq) {
 }
 
 function veureGrafic() {
+  // L'SPEECH DE LA LOCALITZACIÓ ES TROBA A creaGrafic(rq)
+
   document.getElementById('chatdiv').setAttribute("style", "display: none !important");
+  document.getElementById('perfildiv').setAttribute("style", "display: none");
   document.getElementById('graphicdiv').setAttribute("style", "display: flex");
 }
 
@@ -301,6 +323,7 @@ function creaBlocMissatge(datahora, codiusuari, nom, codimissatge, missatge) {
   buttonVolumeUp.setAttribute("class", "btn btn-warning float-right border border-dark");
   buttonVolumeUp.setAttribute('id', 'audiomissatge-' + codimissatge);
   buttonVolumeUp.setAttribute('title', "Listen to audio");
+  buttonVolumeUp.setAttribute('aria-label', "Listen to audio");
   buttonVolumeUp.classList.add('red-focus-within');
 
   var volumeUp = document.createElement("i");
@@ -317,6 +340,10 @@ function creaBlocMissatge(datahora, codiusuari, nom, codimissatge, missatge) {
     var idBoto = boto.split("-")[1];
     let missatge = document.getElementById('missatge' + idBoto).textContent;
     speak(missatge);
+  });
+
+  buttonVolumeUp.addEventListener("focus", function () { 
+    responsiveVoice.speak("Listen to message");
   });
 
   // AFEGIR FILA AL CONTENIDOR
@@ -372,7 +399,8 @@ function creaBlocMissatge2(datahora, codiusuari, nom, codimissatge, missatge) {
   buttonVolumeUp.setAttribute("type", "button");
   buttonVolumeUp.setAttribute("class", "btn btn-warning float-right border border-dark");
   buttonVolumeUp.setAttribute('id', 'audiomissatge-' + codimissatge);
-  buttonVolumeUp.setAttribute('title', "Listen to audio");
+  buttonVolumeUp.setAttribute('title', "Listen to message");
+  buttonVolumeUp.setAttribute('aria-label', "Listen to message");
   buttonVolumeUp.classList.add('red-focus-within');
 
   var volumeUp = document.createElement("i");
@@ -389,6 +417,10 @@ function creaBlocMissatge2(datahora, codiusuari, nom, codimissatge, missatge) {
     var idBoto = boto.split("-")[1];
     let missatge = document.getElementById('missatge' + idBoto).textContent;
     speak(missatge);
+  });
+
+  buttonVolumeUp.addEventListener("focus", function () { 
+    responsiveVoice.speak("Listen to message");
   });
 
   // AFEGIR FILA AL CONTENIDOR
@@ -424,10 +456,12 @@ function enviaMissatge_mostra(rq) {
     let note_message = document.getElementById("note_message");
     note_message.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><b>Message sent.</b>';
     showIt(document.getElementById("modal"));
+    responsiveVoice.speak("Message sent successfully");
   } else {
     msg = document.getElementById("error-message");
     msg.innerHTML = 'Error sending message. Try again later.';
     document.getElementById("error-message-container").setAttribute("style", "display: block;");
+    responsiveVoice.speak(document.getElementById("error-message").textContent);
   }
 }
 
@@ -477,8 +511,8 @@ function mostraMissatges(rq) {
   } else {
     if (rq.status != 200) {
       var msg = document.getElementById('error-message');
-      var msg = document.getElementById('noumissatge');
       msg.innerHTML = 'Error loading messages';
+      responsiveVoice.speak(msg.textContent);
       ocultaSpin();
     }
   }
@@ -494,8 +528,8 @@ function guardaperfil(rq) {
   formdata.append('nom', nom);
   var password = document.getElementById('perfilpsw').value;
   formdata.append('password', password);
-  var foto = document.getElementById('perfilfoto').files[0];
-  formdata.append('foto', foto);
+  //var foto = document.getElementById('perfilfoto').files[0];
+  //formdata.append('foto', foto);
   //objecte
   rq.onreadystatechange = function () { resultatPerfil(rq); };
   rq.open("POST", URL_PERFIL, true);
@@ -508,7 +542,8 @@ function guardaperfil(rq) {
 function resultatPerfil(rq) {
   if (rq.readyState == 4) {
     if (rq.status == 200) {
-      editamissatges();
+      var rq = agafaObjecte();
+      carregaXat(rq);
     } else {
       // TODO
     }
@@ -550,4 +585,109 @@ function posaGalleta() {
   setCookie(nomgalleta, nom, 30);
   var psw = document.getElementById('psw').value;
   setCookie(pswgalleta, psw, 30);
+}
+
+function carregaOnFocusElements() {
+
+  ////////////////// SIGN IN ////////////////////
+
+  // NAME
+  document.getElementById("nom").addEventListener("focus", function() {
+    responsiveVoice.speak("Please write your email");
+  });
+
+  // PASSWORD
+  document.getElementById("psw").addEventListener("focus", function() {
+    responsiveVoice.speak("Please write your password");
+  });
+
+  // LOGIN BUTTON
+  document.getElementById("btlogin").addEventListener("focus", function(){
+    responsiveVoice.speak("Log In");
+  });
+
+  // SIGN IN BUTTON
+  document.getElementById("register").addEventListener("focus", function(){
+    responsiveVoice.speak("Don't have an account? Sign up here.")
+  });
+
+  ///////////////// SIGN UP ////////////////////
+
+  // USERNAME
+
+  document.getElementById("nom-registre").addEventListener("focus", function(){
+    responsiveVoice.speak("Please type a username");
+  });
+
+  // EMAIL
+
+  document.getElementById("email-registre").addEventListener("focus", function(){
+    responsiveVoice.speak("Please type an email");
+  });
+
+  // PASSWORD
+
+  document.getElementById("psw-registre").addEventListener("focus", function () { 
+    responsiveVoice.speak("Please type a password");
+  });
+
+  // REPEAT PASSWORD
+
+  document.getElementById("psw-registre2").addEventListener("focus", function(){
+    responsiveVoice.speak("Please repeat the password");
+  });
+
+  // REGISTER. SIGN UP
+
+  document.getElementById("btRegistre").addEventListener("focus", function () { 
+    if(isEmptyOrSpaces(document.getElementById("nom-registre").value) || isEmptyOrSpaces(document.getElementById("email-registre").value)) {
+      responsiveVoice.speak("Do you want to register? You can't, because username or email is blank.");
+    } else {
+      responsiveVoice.speak("Do you want to register? Your username will be "+document.getElementById("nom-registre").value + " and your email will be " + document.getElementById("email-registre").value);
+    }
+  });
+
+  // ALREADY HAVE ACCOUNT? SIGN IN
+
+  document.getElementById("signin").addEventListener("focus", function(){
+    responsiveVoice.speak("Do you already have an account? Please sign in here.");
+  });
+
+  ////////////////// CHAT ///////////////////////
+
+  // MESSAGE
+  document.getElementById("noumissatge").addEventListener("focus", function() {
+    responsiveVoice.speak("Please type a message");
+  });
+
+  // + 
+  document.getElementById("btnoumsg").addEventListener("focus", function(){
+    if(isEmptyOrSpaces(document.getElementById("noumissatge").value)) {
+      responsiveVoice.speak("Do you want to send message? You can't, because it can not be blank");
+    } else {
+      responsiveVoice.speak("Do you want to send message? The message is " + document.getElementById("noumissatge").value);
+    }
+  });
+
+  // VOICE
+  document.getElementById("voiceOptions").addEventListener("focus", function(){
+    responsiveVoice.speak("Select default voice for playing chat audios");
+  });
+
+  // MENU
+  document.getElementById("btperfil").addEventListener("focus", function () { 
+    responsiveVoice.speak("Display your profile settings");
+  });
+
+  document.getElementById("btchat").addEventListener("focus", function () { 
+    responsiveVoice.speak("Display your chat menu");
+  });
+
+  document.getElementById("btgraphic").addEventListener("focus", function(){
+    responsiveVoice.speak("Display an statistical graphic");
+  });
+
+  document.getElementById("logout").addEventListener("focus", function(){
+    responsiveVoice.speak("Log out");
+  });
 }
