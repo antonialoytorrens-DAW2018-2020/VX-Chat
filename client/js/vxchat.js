@@ -326,7 +326,7 @@ function creaBlocMissatge2(datahora, codiusuari, nom, codimissatge, missatge) {
   // CONTENIDOR
   var msg = document.getElementById('missatges');
 
-  // FILA
+    // FILA
 
   var fila = document.createElement("li");
   fila.setAttribute('class', 'list-group-item');
@@ -338,9 +338,42 @@ function creaBlocMissatge2(datahora, codiusuari, nom, codimissatge, missatge) {
 
   // INFO MISSATGE
 
-  var span = document.createElement("span");
-  span.setAttribute('style', 'font-size:9px');
-  span.setAttribute('class', 'badge');
+  var span = document.createElement("p");
+  span.setAttribute('style', 'font-size:14px; font-weight: bold;');
+  span.innerHTML = formataData(datahora) + ' ' + nom;
+  fila.appendChild(span);
+
+  // foto
+  /*
+  if (json[i].foto!=''){
+   var img=document.createElement("img");
+   img.setAttribute('height','50');
+   img.setAttribute('class','rounded-circle z-depth-2');
+   img.setAttribute('src',json[i].foto);
+   img.setAttribute('data-holder-rendered',true);
+   fila.appendChild(img);
+  }*/
+
+  // CONTINGUT DEL MISSATGE
+
+  var p = document.createElement("p");
+  p.setAttribute('style', 'font-size:18px');
+  p.setAttribute('id', 'missatge' + codimissatge);
+  p.innerHTML = missatge;
+  fila.appendChild(p);  // FILA
+
+  var fila = document.createElement("li");
+  fila.setAttribute('class', 'list-group-item');
+  if (codiusuari == codiUsuariActual) {
+    fila.setAttribute('style', 'background-color:#ccffff');
+  } else {
+    fila.setAttribute('style', 'background-color:#ccffcc');
+  }
+
+  // INFO MISSATGE
+
+  var span = document.createElement("p");
+  span.setAttribute('style', 'font-size:14px; font-weight: bold;');
   span.innerHTML = formataData(datahora) + ' ' + nom;
   fila.appendChild(span);
 
