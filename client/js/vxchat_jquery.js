@@ -75,7 +75,10 @@ function afegeixUsuari(rq) {
 
     // PASSWORDS ARE EQUAL, NAME AND EMAIL ARE NOT EMPTY
 
-    if ($("#psw-registre").val() == $("#psw-registre2").val() && !isEmptyOrSpaces($('#nom-registre').val() && !isEmptyOrSpaces($("#email-registre").val()) {
+    if ($("#psw-registre").val() == $("#psw-registre2").val()
+        && !isEmptyOrSpaces($('#nom-registre').val())
+        && !isEmptyOrSpaces($("#email-registre").val())) {
+            
         // REGISTER USER
         $.ajax({
             url: URL_LOGIN,
