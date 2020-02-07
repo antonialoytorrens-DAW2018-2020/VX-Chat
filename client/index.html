@@ -40,15 +40,15 @@
       <img src="./img/vx.png" class="img-responsive img-fluid" alt="VX-Chat Logo">
       <div class="d-flex flex-content w-100 justify-content-end" id="logindiv">
         <nav role="presentation" aria-label="Main Navigation" id="flyoutnavkbbtn">
-          <ul class="d-flex flex-content" id="dropdown-content">
-            <li class="has-submenu">
+          <ul class="d-flex flex-content" style="background-color: white;">
+            <li id="dropdown-content" class="has-submenu">
               <a aria-haspopup="true" aria-expanded="true" id="nomusuari"
-                class="d-flex flex-content align-items-center justify-content-end"></a>
-              <ul>
-                <li><button id="btperfil" class="btn-link w-100 text-right">Profile</button></li>
-                <li><button id="btchat" class="btn-link w-100 text-right">View chat</button></li>
-                <li><button id="btgraphic" class="btn-link w-100 text-right">View graphic</button></li>
-                <li><button id="logout" class="btn-link w-100 text-right">Logout</button></li>
+                class="d-flex flex-content justify-content-end"></a>
+              <ul style="background-color: white; width: 22rem; border: 1px solid #007bff; border-radius: 0.25rem !important;">
+                <li class="text-right"><button id="btperfil" class="btn-link">Profile</button></li>
+                <li class="text-right"><button id="btchat" class="btn-link">View chat</button></li>
+                <li class="text-right"><button id="btgraphic" class="btn-link">View graphic</button></li>
+                <li class="text-right"><button id="logout" class="btn-link">Logout</button></li>
               </ul>
             </li>
           </ul>
@@ -211,12 +211,10 @@
               </div>
               <input type="password" class="form-control" id="perfilpsw" name="PERFILPSW" placeholder="Password">
             </div>
-            <div class="form-group d-flex flex-content justify-content-end">
-              <div class="input-group-prepend m-2">
-                <input type="button" id="btperfilcancela" class="btn btn-info btn-lg" value="Cancel·la">
-              </div>
-              <div class="input-group-prepend">
-                <input type="button" id="btperfilguarda" class="btn btn-primary btn-lg" value="Guarda">
+            <div class="d-flex flex-content justify-content-end">
+              <div class="input-group-prepend m-2 d-flex flex-content justify-content-end">
+                <input type="button" id="btperfilcancela" class="btn btn-danger mr-2 red-focus-within" value="Cancel">
+                <input type="button" id="btperfilguarda" class="btn btn-primary red-focus-within" value="Save">
               </div>
             </div>
           </div>
@@ -228,7 +226,7 @@
         </div>-->
           <div class="card-footer">
             <div class="d-flex justify-content-center">
-              <div id="errorlogindiv">Error: User or password is wrong.</div>
+              <div id="errormodperfil">Error: User or password is wrong.</div>
             </div>
           </div>
         </div>

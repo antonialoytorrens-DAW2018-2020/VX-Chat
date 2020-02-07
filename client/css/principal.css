@@ -1,7 +1,7 @@
 .img-center {
     margin: 0 auto;
 }    
-#errorlogindiv, #errorUsuariRegistreDiv, #errorContrasenyaRegistreDiv, #error-message, #errorUsuariRegistreDiv2{
+#errorlogindiv, #errorUsuariRegistreDiv, #errorContrasenyaRegistreDiv, #error-message, #errorUsuariRegistreDiv2, #errormodperfil{
 	color: #ce2700;
 	font-family: Open Sans;
 	font-weight: bold;    
@@ -35,6 +35,7 @@ body {
 
 .red-focus-within:focus-within {
   background: #FF3333;
+  color: white;
 }
 
 #register, #signin {
