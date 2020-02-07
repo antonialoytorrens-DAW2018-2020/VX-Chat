@@ -29,6 +29,8 @@ function carregaInici() {
 
   carregaOnFocusElements();
 
+  tancaDropdown();
+
   document.getElementById("nom").addEventListener("change", function () {
     posaGalleta();
   });
@@ -114,10 +116,13 @@ function afegeixUsuari(rq) {
 
 function editaperfil() {
   responsiveVoice.speak("You are in the profile section");
+  document.getElementById("general").setAttribute("style", "margin-top: 0rem");
   document.getElementById('pswdiv').setAttribute("style", "display: none");
+  document.getElementById('errormodperfil').setAttribute("style", "display: none !important");
   document.getElementById('chatdiv').setAttribute("style", "display: none !important");
   document.getElementById('message-container').setAttribute("style", "display: none");
   document.getElementById('perfildiv').setAttribute("style", "display: block");
+  fadeIn(document.getElementById('perfildiv'), 1000);
   document.getElementById('graphicdiv').setAttribute("style", "display: none");
   document.getElementById('perfilnom').value = document.getElementById('nom_usuari').value;
   document.getElementById('perfilemail').value = document.getElementById('email_usuari').value;
@@ -186,13 +191,14 @@ function carregaXat(rq) {
   var boto_graphic = document.getElementById('btgraphic');
 
   carregaDropdown();
+  estaObertDropdown();
 
   boto.addEventListener("click", function () {
     if (isEmptyOrSpaces(document.getElementById("noumissatge").value)) {
       let note_message = document.getElementById("note_message");
-    note_message.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i><b> Message cannot be blank.</b>';
-    showIt(document.getElementById("modal"));
-    responsiveVoice.speak("Error sending message. It cannot be blank.");
+      note_message.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i><b> Message cannot be blank.</b>';
+      showIt(document.getElementById("modal"));
+      responsiveVoice.speak("Error sending message. It cannot be blank.");
     } else {
       var rq = agafaObjecte();
       enviaMissatge(rq);
@@ -238,6 +244,7 @@ function construeixGrafic(rq) {
 function veureGrafic() {
   // L'SPEECH DE LA LOCALITZACIÓ ES TROBA A creaGrafic(rq)
 
+  estaObertDropdown();
   document.getElementById('chatdiv').setAttribute("style", "display: none !important");
   document.getElementById('perfildiv').setAttribute("style", "display: none");
   document.getElementById('message-container').setAttribute("style", "display: none");
@@ -326,41 +333,7 @@ function creaBlocMissatge2(datahora, codiusuari, nom, codimissatge, missatge) {
   // CONTENIDOR
   var msg = document.getElementById('missatges');
 
-    // FILA
-
-  var fila = document.createElement("li");
-  fila.setAttribute('class', 'list-group-item');
-  if (codiusuari == codiUsuariActual) {
-    fila.setAttribute('style', 'background-color:#ccffff');
-  } else {
-    fila.setAttribute('style', 'background-color:#ccffcc');
-  }
-
-  // INFO MISSATGE
-
-  var span = document.createElement("p");
-  span.setAttribute('style', 'font-size:14px; font-weight: bold;');
-  span.innerHTML = formataData(datahora) + ' ' + nom;
-  fila.appendChild(span);
-
-  // foto
-  /*
-  if (json[i].foto!=''){
-   var img=document.createElement("img");
-   img.setAttribute('height','50');
-   img.setAttribute('class','rounded-circle z-depth-2');
-   img.setAttribute('src',json[i].foto);
-   img.setAttribute('data-holder-rendered',true);
-   fila.appendChild(img);
-  }*/
-
-  // CONTINGUT DEL MISSATGE
-
-  var p = document.createElement("p");
-  p.setAttribute('style', 'font-size:18px');
-  p.setAttribute('id', 'missatge' + codimissatge);
-  p.innerHTML = missatge;
-  fila.appendChild(p);  // FILA
+  // FILA
 
   var fila = document.createElement("li");
   fila.setAttribute('class', 'list-group-item');
@@ -590,6 +563,21 @@ function posaGalleta() {
   setCookie(pswgalleta, psw, 30);
 }
 
+function estaObertDropdown() {
+  if (document.getElementById("dropdown-content").className == "has-submenu open") {
+    document.getElementById("dropdown-content").querySelector('a').setAttribute('aria-expanded', "true");
+    document.getElementById("dropdown-content").querySelector('button').setAttribute('aria-expanded', "true");
+    document.getElementById("general").setAttribute("style", "margin-top: 6rem");
+  }
+}
+
+function tancaDropdown() {
+  document.getElementById("dropdown-content").className = "has-submenu";
+  document.getElementById("dropdown-content").querySelector('a').setAttribute('aria-expanded', "false");
+  document.getElementById("dropdown-content").querySelector('button').setAttribute('aria-expanded', "false");
+  document.getElementById("general").setAttribute("style", "margin-top: 0rem");
+}
+
 function carregaOnClickElements() {
   document.getElementById('btperfil').addEventListener("click", function () {
     editaperfil();
@@ -733,4 +721,39 @@ function carregaOnFocusElements() {
   document.getElementById("logout").addEventListener("focus", function () {
     responsiveVoice.speak("Log out");
   });
+
+  ////////////////// PROFILE ///////////////////////
+
+  //NAME
+
+  document.getElementById("perfilnom").addEventListener("focus", function () {
+    responsiveVoice.speak("Change your profile name. Your profile name is " + document.getElementById("perfilnom").textContent);
+  });  
+  
+  //EMAIL
+
+  document.getElementById("perfilemail").addEventListener("focus", function () {
+    responsiveVoice.speak("Change your profile email. Your profile email is " + document.getElementById("perfilemail").textContent);
+  }); 
+
+  // PASSWORD
+
+  document.getElementById("perfilpsw").addEventListener("focus", function(){
+    responsiveVoice.speak("Set a new password.");
+  });
+
+  // CANCEL
+
+  document.getElementById("btperfilcancela").addEventListener("focus", function(){
+    responsiveVoice.speak("Cancel your changes.");
+  });
+
+  document.getElementById("btperfilguarda").addEventListener("focus", function(){
+   if (isEmptyOrSpaces(document.getElementById("perfilnom").value) || isEmptyOrSpaces(document.getElementById("perfilemail").value)) {
+      responsiveVoice.speak("Do you want to save your changes? You can't, because username or email is blank.");
+    } else {
+      responsiveVoice.speak("Do you want to save your changes? Your username will be " + document.getElementById("perfilnom").value + " and your email will be " + document.getElementById("perfilemail").value);
+    }
+  });
+
 }
