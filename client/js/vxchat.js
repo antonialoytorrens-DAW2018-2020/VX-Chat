@@ -15,13 +15,10 @@ window.onload = function () {
 }
 
 function carregaInici() {
-  var boto = document.getElementById('btlogin');
-  var registre = document.getElementById('register');
-  var pswdiv = document.getElementById('pswdiv');
-  pswdiv.setAttribute("style", "display: block");
-  fadeIn(pswdiv, 1000);
+  fadeIn(document.getElementById('pswdiv'), 1000);
   document.getElementById('pswdiv').setAttribute("style", "display: block");
   document.getElementById('pswregistre').setAttribute("style", "display: none");
+  document.getElementById('message-container').setAttribute("style", "display: none");
   document.getElementById('chatdiv').setAttribute("style", "display: none !important");
   document.getElementById('logindiv').setAttribute("style", "display: none !important");
   document.getElementById('perfildiv').setAttribute("style", "display: none");
@@ -40,36 +37,8 @@ function carregaInici() {
     posaGalleta();
   });
 
-  //document.getElementById('nom').onchange = posaGalleta;
-  //document.getElementById('psw').onchange = posaGalleta;
+  carregaOnClickElements();
 
-  document.getElementById('btperfil').addEventListener("click", function () {
-    editaperfil();
-  });
-
-  document.getElementById('btchat').addEventListener("click", function(){
-    var rq = agafaObjecte();
-    carregaXat(rq);
-  });
-
-  document.getElementById('btperfilcancela').addEventListener("click", function () {
-    var rq = agafaObjecte();
-    carregaXat(rq);
-  });
-
-  document.getElementById('btperfilguarda').addEventListener("click", function () {
-    var rq = agafaObjecte();
-    guardaperfil(rq);
-  });
-
-  boto.addEventListener("click", function () {
-    var rq = agafaObjecte();
-    validaLogin(rq);
-  });
-
-  registre.addEventListener("click", function () {
-    registreUsuari();
-  });
   responsiveVoice.speak("You are in the sign in section");
 }
 
@@ -78,25 +47,15 @@ function registreUsuari() {
   let registre = document.getElementById('pswregistre');
   document.getElementById('pswdiv').setAttribute("style", "display: none");
   document.getElementById('chatdiv').setAttribute("style", "display: none !important");
+  document.getElementById('logindiv').setAttribute("style", "display: none !important");
+  document.getElementById('message-container').setAttribute("style", "display: none");
   document.getElementById('errorUsuariRegistreDiv').setAttribute("style", "display: none");
   document.getElementById('errorUsuariRegistreDiv2').setAttribute("style", "display: none");
   document.getElementById('errorContrasenyaRegistreDiv').setAttribute("style", "display: none");
   registre.setAttribute("style", "display: block");
   fadeIn(registre, 1000);
-  document.getElementById('chatdiv').setAttribute("style", "display: none !important");
-  document.getElementById('logindiv').setAttribute("style", "display: none !important");
   document.getElementById('perfildiv').setAttribute("style", "display: none");
   document.getElementById('errorlogindiv').setAttribute("style", "display: none");
-
-  document.getElementById("btRegistre").addEventListener("click", function () {
-    var rq = agafaObjecte();
-    afegeixUsuari(rq);
-  });
-
-  document.getElementById("signin").addEventListener("click", function () {
-    carregaInici();
-  });
-
 }
 
 function afegeixUsuari(rq) {
@@ -157,6 +116,7 @@ function editaperfil() {
   responsiveVoice.speak("You are in the profile section");
   document.getElementById('pswdiv').setAttribute("style", "display: none");
   document.getElementById('chatdiv').setAttribute("style", "display: none !important");
+  document.getElementById('message-container').setAttribute("style", "display: none");
   document.getElementById('perfildiv').setAttribute("style", "display: block");
   document.getElementById('graphicdiv').setAttribute("style", "display: none");
   document.getElementById('perfilnom').value = document.getElementById('nom_usuari').value;
@@ -213,10 +173,13 @@ function carregaXat(rq) {
   document.getElementById('pswdiv').setAttribute("style", "display: none");
   document.getElementById('perfildiv').setAttribute("style", "display: none");
   document.getElementById('graphicdiv').setAttribute("style", "display: none");
+  document.getElementById('message-container').setAttribute("style", "display: flex");
   var chatdiv = document.getElementById('chatdiv');
   chatdiv.setAttribute("style", "display: block");
   document.getElementById("error-message-container").setAttribute("style", "display: none;");
   fadeIn(chatdiv, 1000);
+  var message_container = document.getElementById('message-container');
+  fadeIn(message_container, 1000);
   var logindiv = document.getElementById('logindiv');
   logindiv.setAttribute("style", "display: block");
   var boto = document.getElementById('btnoumsg');
@@ -270,6 +233,7 @@ function veureGrafic() {
 
   document.getElementById('chatdiv').setAttribute("style", "display: none !important");
   document.getElementById('perfildiv').setAttribute("style", "display: none");
+  document.getElementById('message-container').setAttribute("style", "display: none");
   document.getElementById('graphicdiv').setAttribute("style", "display: flex");
 }
 
@@ -291,9 +255,8 @@ function creaBlocMissatge(datahora, codiusuari, nom, codimissatge, missatge) {
 
   // INFO MISSATGE
 
-  var span = document.createElement("span");
-  span.setAttribute('style', 'font-size:9px');
-  span.setAttribute('class', 'badge');
+  var span = document.createElement("p");
+  span.setAttribute('style', 'font-size:14px; font-weight: bold;');
   span.innerHTML = formataData(datahora) + ' ' + nom;
   fila.appendChild(span);
 
@@ -311,7 +274,7 @@ function creaBlocMissatge(datahora, codiusuari, nom, codimissatge, missatge) {
   // CONTINGUT DEL MISSATGE
 
   var p = document.createElement("p");
-  p.setAttribute('style', 'font-size:14px');
+  p.setAttribute('style', 'font-size:18px');
   p.setAttribute('id', 'missatge' + codimissatge);
   p.innerHTML = missatge;
   fila.appendChild(p);
@@ -322,8 +285,8 @@ function creaBlocMissatge(datahora, codiusuari, nom, codimissatge, missatge) {
   buttonVolumeUp.setAttribute("type", "button");
   buttonVolumeUp.setAttribute("class", "btn btn-warning float-right border border-dark");
   buttonVolumeUp.setAttribute('id', 'audiomissatge-' + codimissatge);
-  buttonVolumeUp.setAttribute('title', "Listen to audio");
-  buttonVolumeUp.setAttribute('aria-label', "Listen to audio");
+  buttonVolumeUp.setAttribute('title', "Listen to message");
+  buttonVolumeUp.setAttribute('aria-label', "Listen to message");
   buttonVolumeUp.classList.add('red-focus-within');
 
   var volumeUp = document.createElement("i");
@@ -388,7 +351,7 @@ function creaBlocMissatge2(datahora, codiusuari, nom, codimissatge, missatge) {
   // CONTINGUT DEL MISSATGE
 
   var p = document.createElement("p");
-  p.setAttribute('style', 'font-size:14px');
+  p.setAttribute('style', 'font-size:18px');
   p.setAttribute('id', 'missatge' + codimissatge);
   p.innerHTML = missatge;
   fila.appendChild(p);
@@ -585,6 +548,46 @@ function posaGalleta() {
   setCookie(nomgalleta, nom, 30);
   var psw = document.getElementById('psw').value;
   setCookie(pswgalleta, psw, 30);
+}
+
+function carregaOnClickElements() {
+  document.getElementById('btperfil').addEventListener("click", function () {
+    editaperfil();
+  });
+
+  document.getElementById('btchat').addEventListener("click", function(){
+    var rq = agafaObjecte();
+    carregaXat(rq);
+  });
+
+  document.getElementById('btperfilcancela').addEventListener("click", function () {
+    var rq = agafaObjecte();
+    carregaXat(rq);
+  });
+
+  document.getElementById('btperfilguarda').addEventListener("click", function () {
+    var rq = agafaObjecte();
+    guardaperfil(rq);
+  });
+
+  document.getElementById('btlogin').addEventListener("click", function () {
+    var rq = agafaObjecte();
+    validaLogin(rq);
+  });
+
+  document.getElementById('register').addEventListener("click", function () {
+    registreUsuari();
+  });
+
+
+  document.getElementById("btRegistre").addEventListener("click", function () {
+    var rq = agafaObjecte();
+    afegeixUsuari(rq);
+  });
+
+  document.getElementById("signin").addEventListener("click", function () {
+    carregaInici();
+  });
 }
 
 function carregaOnFocusElements() {

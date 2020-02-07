@@ -7,6 +7,8 @@
   <!--FONT AWESOME-->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
     integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <!--JQUERY-->
+  <script src="./jquery/jquery.min.js"></script>
   <!-- Bootstrap -->
   <link href="bs/css/bootstrap.min.css" rel="stylesheet">
   <!--<script src="bs/css/bootstrap.min.js"></script>-->
@@ -18,7 +20,7 @@
   <script src="./js/funcions.js"></script>
   <script src="./js/dropdown.js"></script>
   <!--Graphic-->
-  <script src="./js/chart-2.9.3.min.js"></script>
+  <script src="./chart/chart-2.9.3.min.js"></script>
   <script src="./js/graphic.js"></script>
   <!-- Codi ajax -->
   <script src="./js/vxchat.js"></script>
@@ -157,7 +159,7 @@
     <!--MESSAGE LIST-->
 
     <div id="chatdiv" class="container d-flex justify-content-center overflow-auto" style="align-items: center;">
-      <div class="card d-flex flex-content">
+      <div class="card d-flex flex-content w-100">
         <div class="card-header">
           <h3>Chat</h3>
         </div>
@@ -165,15 +167,6 @@
           <div id="error-message"></div>
         </div>
         <div class="card-body">
-          <div class="input-group form-group">
-            <textarea class="form-control" rows="2" cols="100" id="noumissatge" placeholder="Message..."
-              style="resize: none; border-radius: 0.5rem;"></textarea>
-            <div>
-              <input type="button" id="btnoumsg"
-                class="btn btn-yellow border border-dark btn-lg active align-middle red-focus-within"
-                aria-label="Send message" title="Send message" value="+">
-            </div>
-          </div>
           <div class="input-group d-flex flex-content form-group">
             <div id="spin" class="d-flex w-100 justify-content-center">
               <img id="volta" class="img-responsive img-center" src="./img/loading.gif" alt="Loading symbol">
@@ -183,6 +176,10 @@
           </div>
         </div>
         <div class="card-footer">
+        </div>
+        <div class="card-body">
+          <div class="buit" style="height: 10rem;">
+          </div>
         </div>
       </div>
     </div>
@@ -267,9 +264,21 @@
         <select class="form-control mb-2" id="voiceOptions" tabindex="2"
           style="width: 50%; flex: none; margin: auto;"></select>
       </div>
+      <div class="input-group form-group w-100 justify-content-center" id="message-container">
+        <div class="w-50 justify-content-center">
+          <textarea class="form-control float-left" rows="2" cols="100" id="noumissatge" placeholder="Message..."
+            style="resize: none; border-radius: 0.5rem;"></textarea>
+        </div>
+        <div class="justify-content-center">
+          <input type="button" id="btnoumsg"
+            class="btn btn-yellow border border-dark btn-lg active align-middle red-focus-within"
+            aria-label="Send message" title="Send message" value="+" style="height: 100%">
+        </div>
+      </div>
       © 2020 Antoni Aloy Torrens:
       <a href="https://mdbootstrap.com/education/bootstrap/">VX-Chat</a>
       <p class="font-weight-bold">The International Chat for Everyone</p>
+    </div>
     </div>
     <!-- Copyright -->
 

@@ -17,7 +17,9 @@ function speak(text) {
     msg.rate = 0.8;
     msg.Pitch = 1;
     msg.text = text;
-    window.speechSynthesis.speak(msg);
+    setTimeout(function() {
+        window.speechSynthesis.speak(msg);
+    }, 1000);
 };
 function loadVoices() {
     voiceOptions.innerHTML = '';
