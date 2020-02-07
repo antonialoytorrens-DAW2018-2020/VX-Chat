@@ -727,13 +727,13 @@ function carregaOnFocusElements() {
   //NAME
 
   document.getElementById("perfilnom").addEventListener("focus", function () {
-    responsiveVoice.speak("Change your profile name. Your profile name is " + document.getElementById("perfilnom").textContent);
+    responsiveVoice.speak("Change your profile name. Your profile name is " + document.getElementById("perfilnom").value);
   });  
   
   //EMAIL
 
   document.getElementById("perfilemail").addEventListener("focus", function () {
-    responsiveVoice.speak("Change your profile email. Your profile email is " + document.getElementById("perfilemail").textContent);
+    responsiveVoice.speak("Change your profile email. Your profile email is " + document.getElementById("perfilemail").value);
   }); 
 
   // PASSWORD
