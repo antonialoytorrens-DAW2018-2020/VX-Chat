@@ -20,7 +20,9 @@ function creaGrafic(rq) {
       var resultText = resultText + speak;
     }
     var speakMessage = headerMessage + resultText;
-    responsiveVoice.speak(speakMessage);
+    setTimeout(function() {
+      responsiveVoice.speak(speakMessage)
+    }, 3000);
 
     new Chart(document.getElementById("graphic").getContext("2d"), {
       type: 'horizontalBar',
