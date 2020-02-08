@@ -8,7 +8,7 @@ function carregaDropdown() {
 
     Array.prototype.forEach.call(menuItems, function (el, i) {
         var activatingA = el.querySelector('a');
-        var btn = '<button id="button-dropdown" title="Open submenu" tabindex="1"><i class="fas fa-bars" aria-hidden="true"></i></button>';
+        var btn = '<button id="button-dropdown" title="Abrir submenú" tabindex="1" style="display: flex;"><i class="fas fa-bars" aria-hidden="true"></i></button>';
         activatingA.insertAdjacentHTML('afterend', btn);
 
         el.querySelector('button').addEventListener("click", function (event) {
@@ -16,13 +16,13 @@ function carregaDropdown() {
                 this.parentNode.className = "has-submenu open";
                 this.parentNode.querySelector('a').setAttribute('aria-expanded', "true");
                 this.parentNode.querySelector('button').setAttribute('aria-expanded', "true");
-                speak("Submenu opened, there are four sections: Profile Settings, Chat Menu, View Statistical Graphic and Logout.");
+                speak("Submenú abierto, hay cuatro secciones: Los ajustes de perfil, el menú del chat, ver el gráfico estadístico y salir.");
                 document.getElementById("general").setAttribute("style", "margin-top: 6rem");
             } else {
                 this.parentNode.className = "has-submenu";
                 this.parentNode.querySelector('a').setAttribute('aria-expanded', "false");
                 this.parentNode.querySelector('button').setAttribute('aria-expanded', "false");
-                speak("Submenu closed");
+                speak("Submenú cerrado");
                 document.getElementById("general").setAttribute("style", "margin-top: 0rem");
             }
 
@@ -35,6 +35,6 @@ function carregaDropdown() {
         });
     });
     document.getElementById("button-dropdown").addEventListener("focus", function () {
-        speak("Open submenu");
+        speak("Abrir submenú");
     });
 }

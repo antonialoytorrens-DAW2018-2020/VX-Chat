@@ -12,11 +12,11 @@ function creaGrafic(rq) {
       var nombre = dades[i].numeromissatges;
       value.push(nombre);
     }
-    speak("You are in the statistical graphic section");
-    var headerMessage = "In this graphic, you can see the 20th users that have typed more messages. It goes with the following order: ";
+    speak("Estás en la sección del gráfico estadístico");
+    var headerMessage = "En este gráfico, puedes ver los primeros veinte usuarios que han escrito más mensajes, a partir del siguiente orden: ";
     var resultText = '';
     for (i in dades) {
-      var speak = key[i] + ", with " + value[i] + "messages; ";
+      var speak = key[i] + ", con " + value[i] + "mensajes; ";
       var resultText = resultText + speak;
     }
     var speakMessage = headerMessage + resultText;
@@ -30,7 +30,7 @@ function creaGrafic(rq) {
         labels: key,
         datasets: [
           {
-            label: "Message count: ",
+            label: "Recuento de mensajes: ",
             // LES DADES SEMPRE SERAN ELS VINT PRIMERS
             backgroundColor: ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000'],
             data: value
@@ -41,7 +41,7 @@ function creaGrafic(rq) {
         legend: { display: false },
         title: {
           display: false,
-          text: '20th users'
+          text: 'Los 20 usuarios'
         }
       }
     });

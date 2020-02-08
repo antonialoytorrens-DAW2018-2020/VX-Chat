@@ -1,6 +1,6 @@
 function checkCompatibilty() {
     if (!('speechSynthesis' in window)) {
-        alert('Your browser is not supported. If it is Google Chrome, please upgrade!!');
+        alert('Tu navegador no soporta síntesis de voz. Si es Google Chrome, por favor, actualízalo.');
     }
 };
 
@@ -14,7 +14,7 @@ function speakMessage(text) {
     var msg = new SpeechSynthesisUtterance();
     msg.volume = 1;
     msg.voice = voiceMap[voiceOptions.value];
-    msg.rate = 0.8;
+    msg.rate = 1.15;
     msg.Pitch = 1;
     msg.text = text;
     setTimeout(function() {

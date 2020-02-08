@@ -41,11 +41,11 @@ function carregaInici() {
 
   carregaOnClickElements();
 
-  speak("You are in the sign in section");
+  speak("Estás en la sección de inicio de sesión.");
 }
 
 function registreUsuari() {
-  speak("You are in the sign up section");
+  speak("Estás en la sección de registro");
   let registre = document.getElementById('pswregistre');
   document.getElementById('pswdiv').setAttribute("style", "display: none");
   document.getElementById('chatdiv').setAttribute("style", "display: none !important");
@@ -101,7 +101,7 @@ function afegeixUsuari(rq) {
           speak(document.getElementById('errorUsuariRegistreDiv2').textContent);
         } else {
           var note_message = document.getElementById('note_message');
-          note_message.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><b>User has been created.</b>';
+          note_message.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><b>Registro completado con éxito.</b>';
           showIt(document.getElementById("modal"));
           document.getElementById('nom-registre').innerHTML = '';
           document.getElementById('email-registre').innerHTML = '';
@@ -115,7 +115,7 @@ function afegeixUsuari(rq) {
 }
 
 function editaperfil() {
-  speak("You are in the profile section");
+  speak("Estás en la sección de perfil");
   document.getElementById("general").setAttribute("style", "margin-top: 0rem");
   document.getElementById('pswdiv').setAttribute("style", "display: none");
   document.getElementById('errormodperfil').setAttribute("style", "display: none !important");
@@ -174,7 +174,7 @@ function validaLogin_fer(rq) {
 }
 
 function carregaXat(rq) {
-  speak("You are in the message section");
+  speak("Estás en la sección de mensajes");
   document.getElementById('pswdiv').setAttribute("style", "display: none");
   document.getElementById('perfildiv').setAttribute("style", "display: none");
   document.getElementById('graphicdiv').setAttribute("style", "display: none");
@@ -196,9 +196,9 @@ function carregaXat(rq) {
   boto.addEventListener("click", function () {
     if (isEmptyOrSpaces(document.getElementById("noumissatge").value)) {
       let note_message = document.getElementById("note_message");
-      note_message.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i><b> Message cannot be blank.</b>';
+      note_message.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i><b> El mensaje no puede estar en blanco.</b>';
       showIt(document.getElementById("modal"));
-      speak("Error sending message. It cannot be blank.");
+      speak("Error al enviar el mensaje. No puede estar en blanco.");
     } else {
       var rq = agafaObjecte();
       enviaMissatge(rq);
@@ -299,8 +299,8 @@ function creaBlocMissatge(datahora, codiusuari, nom, codimissatge, missatge) {
   buttonVolumeUp.setAttribute("type", "button");
   buttonVolumeUp.setAttribute("class", "btn btn-warning float-right border border-dark");
   buttonVolumeUp.setAttribute('id', 'audiomissatge-' + codimissatge);
-  buttonVolumeUp.setAttribute('title', "Listen to message");
-  buttonVolumeUp.setAttribute('aria-label', "Listen to message");
+  buttonVolumeUp.setAttribute('title', "Escucha el mensaje");
+  buttonVolumeUp.setAttribute('aria-label', "Escucha el mensaje");
   buttonVolumeUp.classList.add('red-focus-within');
 
   var volumeUp = document.createElement("i");
@@ -320,7 +320,7 @@ function creaBlocMissatge(datahora, codiusuari, nom, codimissatge, missatge) {
   });
 
   buttonVolumeUp.addEventListener("focus", function () {
-    speak("Listen to message");
+    speak("Escucha el mensaje");
   });
 
   // AFEGIR FILA AL CONTENIDOR
@@ -375,8 +375,8 @@ function creaBlocMissatge2(datahora, codiusuari, nom, codimissatge, missatge) {
   buttonVolumeUp.setAttribute("type", "button");
   buttonVolumeUp.setAttribute("class", "btn btn-warning float-right border border-dark");
   buttonVolumeUp.setAttribute('id', 'audiomissatge-' + codimissatge);
-  buttonVolumeUp.setAttribute('title', "Listen to message");
-  buttonVolumeUp.setAttribute('aria-label', "Listen to message");
+  buttonVolumeUp.setAttribute('title', "Escucha el mensaje");
+  buttonVolumeUp.setAttribute('aria-label', "Escucha el mensaje");
   buttonVolumeUp.classList.add('red-focus-within');
 
   var volumeUp = document.createElement("i");
@@ -396,7 +396,7 @@ function creaBlocMissatge2(datahora, codiusuari, nom, codimissatge, missatge) {
   });
 
   buttonVolumeUp.addEventListener("focus", function () {
-    speak("Listen to message");
+    speak("Escucha el mensaje");
   });
 
   // AFEGIR FILA AL CONTENIDOR
@@ -430,12 +430,12 @@ function enviaMissatge_mostra(rq) {
     document.getElementById("error-message").innerHTML = '';
     document.getElementById("error-message-container").setAttribute("style", "display: none;");
     let note_message = document.getElementById("note_message");
-    note_message.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><b>Message sent.</b>';
+    note_message.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><b>Mensaje enviado.</b>';
     showIt(document.getElementById("modal"));
-    speak("Message sent successfully");
+    speak("Mensaje enviado satisfactoriamente");
   } else if (rq.readyState == 4 && rq.status != 200) {
     msg = document.getElementById("error-message");
-    msg.innerHTML = 'Error sending message. Try again later.';
+    msg.innerHTML = 'Error al enviar el mensaje. Inténtalo más tarde.';
     document.getElementById("error-message-container").setAttribute("style", "display: block;");
     speak(document.getElementById("error-message").textContent);
   }
@@ -487,7 +487,7 @@ function mostraMissatges(rq) {
   } else {
     if (rq.status != 200) {
       var msg = document.getElementById('error-message');
-      msg.innerHTML = 'Error loading messages';
+      msg.innerHTML = 'Error al cargar los mensajes';
       //speak(msg.textContent);
       ocultaSpin();
     }
@@ -624,22 +624,22 @@ function carregaOnFocusElements() {
 
   // NAME
   document.getElementById("nom").addEventListener("focus", function () {
-    speak("Please write your email");
+    speak("Por favor, escribe tu email");
   });
 
   // PASSWORD
   document.getElementById("psw").addEventListener("focus", function () {
-    speak("Please write your password");
+    speak("Por favor, escribe tu contraseña");
   });
 
   // LOGIN BUTTON
   document.getElementById("btlogin").addEventListener("focus", function () {
-    speak("Log In");
+    speak("Inicia sesión");
   });
 
   // SIGN IN BUTTON
   document.getElementById("register").addEventListener("focus", function () {
-    speak("Don't have an account? Sign up here.")
+    speak("¿No tienes una cuenta? Regístrate aquí.")
   });
 
   ///////////////// SIGN UP ////////////////////
@@ -647,79 +647,79 @@ function carregaOnFocusElements() {
   // USERNAME
 
   document.getElementById("nom-registre").addEventListener("focus", function () {
-    speak("Please type a username");
+    speak("Por favor, escribe un nombre");
   });
 
   // EMAIL
 
   document.getElementById("email-registre").addEventListener("focus", function () {
-    speak("Please type an email");
+    speak("Por favor, escribe un email");
   });
 
   // PASSWORD
 
   document.getElementById("psw-registre").addEventListener("focus", function () {
-    speak("Please type a password");
+    speak("Por favor, escribe una contraseña");
   });
 
   // REPEAT PASSWORD
 
   document.getElementById("psw-registre2").addEventListener("focus", function () {
-    speak("Please repeat the password");
+    speak("Por favor, repite la contraseña");
   });
 
   // REGISTER. SIGN UP
 
   document.getElementById("btRegistre").addEventListener("focus", function () {
     if (isEmptyOrSpaces(document.getElementById("nom-registre").value) || isEmptyOrSpaces(document.getElementById("email-registre").value)) {
-      speak("Do you want to register? You can't, because username or email is blank.");
+      speak("¿Quieres registrarte? No puedes, porque el usuario o el email son incorrectos.");
     } else {
-      speak("Do you want to register? Your username will be " + document.getElementById("nom-registre").value + " and your email will be " + document.getElementById("email-registre").value);
+      speak("¿Quieres registrarte? Tu nombre de usuario será " + document.getElementById("nom-registre").value + " y tu email será " + document.getElementById("email-registre").value);
     }
   });
 
   // ALREADY HAVE ACCOUNT? SIGN IN
 
   document.getElementById("signin").addEventListener("focus", function () {
-    speak("Do you already have an account? Please sign in here.");
+    speak("¿Ya tienes una cuenta? Inicia la sesión aquí.");
   });
 
   ////////////////// CHAT ///////////////////////
 
   // MESSAGE
   document.getElementById("noumissatge").addEventListener("focus", function () {
-    speak("Please type a message");
+    speak("Por favor, escribe un mensaje");
   });
 
   // + 
   document.getElementById("btnoumsg").addEventListener("focus", function () {
     if (isEmptyOrSpaces(document.getElementById("noumissatge").value)) {
-      speak("Do you want to send message? You can't, because it can not be blank");
+      speak("¿Quieres enviar el mensaje? No puedes, porque no puede estar en blanco.");
     } else {
-      speak("Do you want to send message? The message is " + document.getElementById("noumissatge").value);
+      speak("¿Quieres enviar el mensaje? El mensaje es " + document.getElementById("noumissatge").value);
     }
   });
 
   // VOICE
   document.getElementById("voiceOptions").addEventListener("focus", function () {
-    speak("Select default voice for playing chat audios");
+    speak("Elige la voz para reproducir los audios del chat");
   });
 
   // MENU
   document.getElementById("btperfil").addEventListener("focus", function () {
-    speak("Display your profile settings");
+    speak("Muestra las opciones de tu perfil");
   });
 
   document.getElementById("btchat").addEventListener("focus", function () {
-    speak("Display your chat menu");
+    speak("Muestra el menú del chat");
   });
 
   document.getElementById("btgraphic").addEventListener("focus", function () {
-    speak("Display an statistical graphic");
+    speak("Muestra un gráfico estadístico");
   });
 
   document.getElementById("logout").addEventListener("focus", function () {
-    speak("Log out");
+    speak("Salir");
   });
 
   ////////////////// PROFILE ///////////////////////
@@ -727,39 +727,39 @@ function carregaOnFocusElements() {
   //NAME
 
   document.getElementById("perfilnom").addEventListener("focus", function () {
-    speak("Change your profile name. Your profile name is " + document.getElementById("perfilnom").value);
+    speak("Cambia tu nombre de perfil. Tu nombre de perfil ahora es " + document.getElementById("perfilnom").value);
   });  
   
   //EMAIL
 
   document.getElementById("perfilemail").addEventListener("focus", function () {
-    speak("Change your profile email. Your profile email is " + document.getElementById("perfilemail").value);
+    speak("Cambia tu email de perfil. Tu nombre de email ahora es " + document.getElementById("perfilemail").value);
   }); 
 
   // PASSWORD
 
   document.getElementById("perfilpsw").addEventListener("focus", function(){
-    speak("Set a new password.");
+    speak("Pon una nueva contraseña.");
   });
 
   // CANCEL
 
   document.getElementById("btperfilcancela").addEventListener("focus", function(){
-    speak("Cancel your changes.");
+    speak("Cancela tus cambios.");
   });
 
   document.getElementById("btperfilguarda").addEventListener("focus", function(){
    if (isEmptyOrSpaces(document.getElementById("perfilnom").value) || isEmptyOrSpaces(document.getElementById("perfilemail").value)) {
-      speak("Do you want to save your changes? You can't, because username or email is blank.");
+      speak("¿Quieres guardar tus cambios? No puedes, porque el nuevo usuario o email están vacíos.");
     } else {
-      speak("Do you want to save your changes? Your username will be " + document.getElementById("perfilnom").value + " and your email will be " + document.getElementById("perfilemail").value);
+      speak("¿Quieres guardar tus cambios? Tu nuevo nombre de usuario será " + document.getElementById("perfilnom").value + " y tu email será " + document.getElementById("perfilemail").value);
     }
   });
 
-    // LANGUAGE SELECTION
+  // LANGUAGE SELECTION
   
-    document.getElementById("language-selection").addEventListener("focus", function(){
-      speak("Change language to spanish");
-    });
+  document.getElementById("language-selection").addEventListener("focus", function(){
+    speak("Cambia el idioma a inglés");
+  });
 
 }

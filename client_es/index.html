@@ -1,5 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<html lang="es-ES">
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -45,10 +45,10 @@
               <a aria-haspopup="true" aria-expanded="true" id="nomusuari"
                 class="d-flex flex-content justify-content-end"></a>
               <ul style="background-color: white; border: 1px solid #007bff; border-radius: 0.25rem !important;">
-                <li class="text-right"><button id="btperfil" class="btn-link">Profile</button></li>
-                <li class="text-right"><button id="btchat" class="btn-link">View chat</button></li>
-                <li class="text-right"><button id="btgraphic" class="btn-link">View graphic</button></li>
-                <li class="text-right"><button id="logout" class="btn-link">Logout</button></li>
+                <li class="text-right"><button id="btperfil" class="btn-link">Perfil</button></li>
+                <li class="text-right"><button id="btchat" class="btn-link">Ver el chat</button></li>
+                <li class="text-right"><button id="btgraphic" class="btn-link">Ver el gráfico</button></li>
+                <li class="text-right"><button id="logout" class="btn-link">Salir</button></li>
               </ul>
             </li>
           </ul>
@@ -74,7 +74,7 @@
       <div class="d-flex justify-content-center h-100" id="container-content">
         <div class="card overflow-hidden" style="display: -webkit-box;">
           <div class="card-header">
-            <h3>Sign In</h3>
+            <h3>Inicia la sesión</h3>
           </div>
           <div class="card-body">
             <div class="input-group form-group">
@@ -87,18 +87,18 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-key" aria-hidden="true"></i></span>
               </div>
-              <input type="password" id="psw" name="PSW" class="form-control" placeholder="Password">
+              <input type="password" id="psw" name="PSW" class="form-control" placeholder="Contraseña">
             </div>
             <div class="form-group">
-              <input type="submit" value="Login" id="btlogin" class="btn float-right login_btn red-focus-within">
+              <input type="submit" value="Inicia sesión" id="btlogin" class="btn float-right login_btn red-focus-within" style="width: 8rem;"">
             </div>
           </div>
           <div class="card-footer">
             <div class="d-flex justify-content-center links">
-              Don't have an account? <button id="register" class="btn-link">Sign Up</button>
+              ¿No tienes una cuenta? <button id="register" class="btn-link">Regístrate</button>
             </div>
             <div class="d-flex justify-content-center">
-              <div id="errorlogindiv">Error: User or password is wrong.</div>
+              <div id="errorlogindiv">Error: El usuario o la contraseña son incorrectos.</div>
             </div>
           </div>
         </div>
@@ -111,14 +111,14 @@
       <div class="d-flex justify-content-center h-100">
         <div class="card" style="display: -webkit-box;">
           <div class="card-header">
-            <h3>Sign Up</h3>
+            <h3>Regístrate</h3>
           </div>
           <div class="card-body">
             <div class="input-group form-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-user" aria-hidden="true"></i></span>
               </div>
-              <input type="text" id="nom-registre" name="NOM-REGISTRE" class="form-control" placeholder="Username">
+              <input type="text" id="nom-registre" name="NOM-REGISTRE" class="form-control" placeholder="Nombre">
             </div>
             <div class="input-group form-group">
               <div class="input-group-prepend">
@@ -131,25 +131,25 @@
                 <span class="input-group-text"><i class="fas fa-key" aria-hidden="true"></i></span>
               </div>
               <input type="password" id="psw-registre" name="PSW-REGISTRE" class="form-control"
-                placeholder="Password"><input type="password" id="psw-registre2" name="PSW-REGISTRE2"
-                class="form-control" placeholder="Repeat Password">
+                placeholder="Contraseña"><input type="password" id="psw-registre2" name="PSW-REGISTRE2"
+                class="form-control" placeholder="Repite la contraseña">
             </div>
             <div class="form-group">
-              <input type="submit" value="Sign Up" id="btRegistre" class="btn float-right login_btn red-focus-within">
+              <input type="submit" value="Regístrate" id="btRegistre" class="btn float-right login_btn red-focus-within">
             </div>
           </div>
           <div class="card-footer">
             <div class="d-flex justify-content-center links">
-              Already have an account? <button id="signin">Sign In</button>
+              ¿Ya tienes una cuenta? <button id="signin">Inicia la sesión</button>
             </div>
             <div class="d-flex justify-content-center links">
-              <div id="errorUsuariRegistreDiv">Error: Username or email cannot be blank.</div>
+              <div id="errorUsuariRegistreDiv">Error: El usuario o el email no pueden estar vacíos.</div>
             </div>
             <div class="d-flex justify-content-center links">
-              <div id="errorContrasenyaRegistreDiv">Error: Wrong password.</div>
+              <div id="errorContrasenyaRegistreDiv">Error: Contraseña incorrecta.</div>
             </div>
             <div class="d-flex justify-content-center links">
-              <div id="errorUsuariRegistreDiv2">Error: Email is duplicated.</div>
+              <div id="errorUsuariRegistreDiv2">Error: El email está duplicado.</div>
             </div>
           </div>
         </div>
@@ -190,14 +190,14 @@
       <div class="d-flex justify-content-center h-100" id="container-content">
         <div class="card" style="display: -webkit-box;">
           <div class="card-header">
-            <h3>Profile</h3>
+            <h3>Perfil</h3>
           </div>
           <div class="card-body">
             <div class="input-group form-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-user" aria-hidden="true"></i></span>
               </div>
-              <input type="text" class="form-control" id="perfilnom" name="PERFILNOM" placeholder="Name">
+              <input type="text" class="form-control" id="perfilnom" name="PERFILNOM" placeholder="Nombre">
             </div>
             <div class="input-group form-group">
               <div class="input-group-prepend">
@@ -209,12 +209,12 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-key" aria-hidden="true"></i></span>
               </div>
-              <input type="password" class="form-control" id="perfilpsw" name="PERFILPSW" placeholder="Password">
+              <input type="password" class="form-control" id="perfilpsw" name="PERFILPSW" placeholder="Contraseña">
             </div>
             <div class="d-flex flex-content justify-content-end">
               <div class="input-group-prepend m-2 d-flex flex-content justify-content-end">
-                <input type="button" id="btperfilcancela" class="btn btn-danger mr-2 red-focus-within" value="Cancel">
-                <input type="button" id="btperfilguarda" class="btn btn-primary red-focus-within" value="Save">
+                <input type="button" id="btperfilcancela" class="btn btn-danger mr-2 red-focus-within" value="Cancela">
+                <input type="button" id="btperfilguarda" class="btn btn-primary red-focus-within" value="Guarda">
               </div>
             </div>
           </div>
@@ -226,7 +226,7 @@
         </div>-->
           <div class="card-footer">
             <div class="d-flex justify-content-center">
-              <div id="errormodperfil">Error: User or password is wrong.</div>
+              <div id="errormodperfil">Error: El usuario o la contraseña son incorrectos.</div>
             </div>
           </div>
         </div>
@@ -239,7 +239,7 @@
       <div class="d-flex justify-content-center w-100 h-100" id="container-content">
         <div class="card w-100" style="display: -webkit-box;">
           <div class="card-header">
-            <h3>User posts</h3>
+            <h3>Publicaciones de usuario</h3>
           </div>
           <div class="card-body">
             <div class="input-group form-group d-flex justify-content-center">
@@ -264,7 +264,7 @@
       </div>
       <div class="input-group form-group w-100 justify-content-center" id="message-container">
         <div class="w-50 justify-content-center">
-          <textarea class="form-control float-left" rows="2" cols="100" id="noumissatge" placeholder="Message..."
+          <textarea class="form-control float-left" rows="2" cols="100" id="noumissatge" placeholder="Escribe un mensaje..."
             style="resize: none; border-radius: 0.5rem;"></textarea>
         </div>
         <div class="justify-content-center">
@@ -274,8 +274,8 @@
         </div>
       </div>
       © 2020 Antoni Aloy Torrens
-      <a id="language-selection" href="../client_es/index.html">Change language to Spanish</a>
-      <p class="font-weight-bold">The International Chat for Everyone</p>
+      <a id="language-selection" href="../client/index.html">Cambia a Inglés</a>
+      <p class="font-weight-bold">El chat internacional para todos</p>
     </div>
     </div>
     <!-- Copyright -->
