@@ -17,7 +17,9 @@ function carregaDropdown() {
                 this.parentNode.querySelector('a').setAttribute('aria-expanded', "true");
                 this.parentNode.querySelector('button').setAttribute('aria-expanded', "true");
                 speak("Submenú abierto, hay cuatro secciones: Los ajustes de perfil, el menú del chat, ver el gráfico estadístico y salir.");
-                document.getElementById("general").setAttribute("style", "margin-top: 6rem");
+                if (document.getElementById("chatdiv").style.display != "none") {
+                    document.getElementById("general").setAttribute("style", "margin-top: 6rem");
+                }
             } else {
                 this.parentNode.className = "has-submenu";
                 this.parentNode.querySelector('a').setAttribute('aria-expanded', "false");

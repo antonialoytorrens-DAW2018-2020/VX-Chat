@@ -86,7 +86,7 @@ class Missatge
     public function construeixGrafic() {
         try {
             $result = array();
-            $stm = $this->conn->prepare("SELECT nom, COUNT(codimissatge) AS numeromissatges FROM missatge INNER JOIN usuari ON missatge.codiusuari = usuari.codiusuari GROUP BY nom ORDER BY numeromissatges DESC LIMIT 20");
+            $stm = $this->conn->prepare("SELECT nom, COUNT(codimissatge) AS numeromissatges FROM missatge INNER JOIN usuari ON missatge.codiusuari = usuari.codiusuari GROUP BY nom ORDER BY numeromissatges DESC LIMIT 5");
             $stm->execute();
             $tuples = $stm->fetchAll();
             $this->resposta->setDades($tuples);    // array de tuples

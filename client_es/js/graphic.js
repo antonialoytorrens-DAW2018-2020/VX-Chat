@@ -36,7 +36,7 @@ function creaGrafic(rq) {
       value.push(nombre);
     }
     speak("Estás en la sección del gráfico estadístico");
-    var headerMessage = "En este gráfico, puedes ver los primeros veinte usuarios que han escrito más mensajes, a partir del siguiente orden: ";
+    var headerMessage = "En este gráfico, puedes ver los primeros cinco usuarios que han escrito más mensajes, a partir del siguiente orden: ";
     var resultText = '';
     for (i in dades) {
       var speak = key[i] + ", con " + value[i] + "mensajes; ";
@@ -76,7 +76,7 @@ function creaGrafic(rq) {
           {
             label: "Recuento de mensajes: ",
             // LES DADES SEMPRE SERAN ELS VINT PRIMERS
-            backgroundColor: ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000'],
+            backgroundColor: ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231'],
             data: value
           }
         ]
@@ -85,7 +85,7 @@ function creaGrafic(rq) {
         legend: { display: false },
         title: {
           display: false,
-          text: 'Los 20 usuarios'
+          text: 'Los 5 usuarios'
         }
       }
     });

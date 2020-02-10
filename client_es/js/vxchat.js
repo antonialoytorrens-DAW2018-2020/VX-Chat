@@ -15,6 +15,7 @@ window.onload = function () {
 }
 
 function carregaInici() {
+  document.getElementById("general").setAttribute("style", "margin-top: 0rem");
   fadeIn(document.getElementById('pswdiv'), 1000);
   document.getElementById('pswdiv').setAttribute("style", "display: block");
   document.getElementById('pswregistre').setAttribute("style", "display: none");
@@ -45,6 +46,7 @@ function carregaInici() {
 }
 
 function registreUsuari() {
+  document.getElementById("general").setAttribute("style", "margin-top: 0rem");
   speak("Estás en la sección de registro");
   let registre = document.getElementById('pswregistre');
   document.getElementById('pswdiv').setAttribute("style", "display: none");
@@ -115,8 +117,8 @@ function afegeixUsuari(rq) {
 }
 
 function editaperfil() {
-  speak("Estás en la sección de perfil");
   document.getElementById("general").setAttribute("style", "margin-top: 0rem");
+  speak("Estás en la sección de perfil");
   document.getElementById('pswdiv').setAttribute("style", "display: none");
   document.getElementById('errormodperfil').setAttribute("style", "display: none !important");
   document.getElementById('chatdiv').setAttribute("style", "display: none !important");
@@ -243,8 +245,7 @@ function construeixGrafic(rq) {
 
 function veureGrafic() {
   // L'SPEECH DE LA LOCALITZACIÓ ES TROBA A creaGrafic(rq)
-
-  estaObertDropdown();
+  document.getElementById("general").setAttribute("style", "margin-top: 0rem");
   document.getElementById('chatdiv').setAttribute("style", "display: none !important");
   document.getElementById('perfildiv').setAttribute("style", "display: none");
   document.getElementById('message-container').setAttribute("style", "display: none");

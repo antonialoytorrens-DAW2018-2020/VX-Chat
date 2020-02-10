@@ -17,7 +17,9 @@ function carregaDropdown() {
                 this.parentNode.querySelector('a').setAttribute('aria-expanded', "true");
                 this.parentNode.querySelector('button').setAttribute('aria-expanded', "true");
                 speak("Submenu opened, there are four sections: Profile Settings, Chat Menu, View Statistical Graphic and Logout.");
-                document.getElementById("general").setAttribute("style", "margin-top: 6rem");
+                if (document.getElementById("chatdiv").style.display != "none") {
+                    document.getElementById("general").setAttribute("style", "margin-top: 6rem");
+                }
             } else {
                 this.parentNode.className = "has-submenu";
                 this.parentNode.querySelector('a').setAttribute('aria-expanded', "false");

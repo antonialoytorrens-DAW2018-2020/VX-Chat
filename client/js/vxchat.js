@@ -15,6 +15,7 @@ window.onload = function () {
 }
 
 function carregaInici() {
+  document.getElementById("general").setAttribute("style", "margin-top: 0rem");
   fadeIn(document.getElementById('pswdiv'), 1000);
   document.getElementById('pswdiv').setAttribute("style", "display: block");
   document.getElementById('pswregistre').setAttribute("style", "display: none");
@@ -243,8 +244,7 @@ function construeixGrafic(rq) {
 
 function veureGrafic() {
   // L'SPEECH DE LA LOCALITZACIÓ ES TROBA A creaGrafic(rq)
-
-  estaObertDropdown();
+  document.getElementById("general").setAttribute("style", "margin-top: 0rem");
   document.getElementById('chatdiv').setAttribute("style", "display: none !important");
   document.getElementById('perfildiv').setAttribute("style", "display: none");
   document.getElementById('message-container').setAttribute("style", "display: none");
