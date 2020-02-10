@@ -8,7 +8,7 @@ function carregaDropdown() {
 
     Array.prototype.forEach.call(menuItems, function (el, i) {
         var activatingA = el.querySelector('a');
-        var btn = '<button id="button-dropdown" title="Abrir submenú" tabindex="1" style="display: flex;"><i class="fas fa-bars" aria-hidden="true"></i></button>';
+        var btn = '<button id="button-dropdown" title="Abrir submenú" tabindex="1" style="display: flex;"><em class="fas fa-bars" aria-hidden="true"></em></button>';
         activatingA.insertAdjacentHTML('afterend', btn);
 
         el.querySelector('button').addEventListener("click", function (event) {

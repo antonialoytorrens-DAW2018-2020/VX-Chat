@@ -1,6 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="es-ES">
 
+<meta charset="utf-8">
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,16 +30,17 @@
 </head>
 
 <body>
-  <input type="hidden" value="-1" id="codiusuari">
-  <input type="hidden" value="" id="token">
-  <input type="hidden" value="" id="nom_usuari">
-  <input type="hidden" value="" id="email_usuari">
+  <input id="codiusuari" type="hidden" value="-1">
+  <input id="token" type="hidden" value="">
+  <input id="nom_usuari" type="hidden" value="">
+  <input id="email_usuari" type="hidden" value="">
 
   <!--MENU-->
 
   <nav class="navbar navbar-light bg-light fixed-top d-flex">
     <div class="navbar-brand font-weight-bold w-100 d-flex flex-content align-items-center">
-      <img src="./img/vx.png" class="img-responsive img-fluid" alt="VX-Chat Logo">
+      <img src="./img/vx.png" class="img-responsive img-fluid" alt=""
+        longdesc="Este es el logo de la compañía de VX-Chat. Está compuesto por las letras principales (VX) de la compañía, con una mezcla de colores de rojo y negro.">
       <div class="d-flex flex-content w-100 justify-content-end" id="logindiv">
         <nav role="presentation" aria-label="Main Navigation" id="flyoutnavkbbtn">
           <ul class="d-flex flex-content" style="background-color: white;">
@@ -47,7 +50,7 @@
               <ul style="background-color: white; border: 1px solid #007bff; border-radius: 0.25rem !important;">
                 <li class="text-right"><button id="btperfil" class="btn-link">Perfil</button></li>
                 <li class="text-right"><button id="btchat" class="btn-link">Ver el chat</button></li>
-                <li class="text-right"><button id="btgraphic" class="btn-link">Ver el gráfico</button></li>
+                <li class="text-right"><button id="btgraphic" class="btn-link">Ver gráfico</button></li>
                 <li class="text-right"><button id="logout" class="btn-link">Salir</button></li>
               </ul>
             </li>
@@ -79,211 +82,226 @@
           <div class="card-body">
             <div class="input-group form-group">
               <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-user" aria-hidden="true"></i></span>
+                <span class="input-group-text"><em class="fas fa-user" aria-hidden="true"></em></span>
               </div>
-              <input type="text" id="nom" name="NOM" class="form-control" placeholder="Email">
+              <input type="text" id="nom" name="NOM" class="form-control"
+                placeholder="Email">
             </div>
             <div class="input-group form-group">
               <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-key" aria-hidden="true"></i></span>
+                <span class="input-group-text"><em class="fas fa-key" aria-hidden="true"></em></span>
               </div>
-              <input type="password" id="psw" name="PSW" class="form-control" placeholder="Contraseña">
+              <input type="password" id="psw" name="PSW" class="form-control"
+                placeholder="Contraseña">
             </div>
             <div class="form-group">
-              <input type="submit" value="Inicia sesión" id="btlogin" class="btn float-right login_btn red-focus-within" style="width: 8rem;"">
+              <input type="submit" value="Inicia sesión" id="btlogin"
+                class="btn float-right login_btn red-focus-within" style="width: 8rem;"">
+            </div>
+          </div>
+          <div class=" card-footer">
+              <div class="d-flex justify-content-center links">
+                ¿No tienes una cuenta? <button id="register" class="btn-link">Regístrate</button>
+              </div>
+              <div class="d-flex justify-content-center">
+                <div id="errorlogindiv">Error: El usuario o la contraseña son incorrectos.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--SIGN UP-->
+
+      <div class="container" id="pswregistre">
+        <div class="d-flex justify-content-center h-100">
+          <div class="card" style="display: -webkit-box;">
+            <div class="card-header">
+              <h3>Regístrate</h3>
+            </div>
+            <div class="card-body">
+              <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><em class="fas fa-user" aria-hidden="true"></em></span>
+                </div>
+                <input type="text" id="nom-registre" name="NOM-REGISTRE"
+                  class="form-control" placeholder="Nombre">
+              </div>
+              <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><em class="fas fa-envelope" aria-hidden="true"></em></span>
+                </div>
+                <input type="text" id="email-registre" name="EMAIL-REGISTRE"
+                  class="form-control" placeholder="Email">
+              </div>
+              <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><em class="fas fa-key" aria-hidden="true"></em></span>
+                </div>
+                <input type="password" id="psw-registre" name="PSW-REGISTRE"
+                  class="form-control" placeholder="Contraseña">
+                <input type="password" id="psw-registre2"
+                  name="PSW-REGISTRE2" class="form-control" placeholder="Repite la contraseña">
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Regístrate" id="btRegistre"
+                  class="btn float-right login_btn red-focus-within">
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="d-flex justify-content-center links">
+                ¿Ya tienes una cuenta? <button id="signin">Inicia la sesión</button>
+              </div>
+              <div class="d-flex justify-content-center links">
+                <div id="errorUsuariRegistreDiv">Error: El usuario o el email no pueden estar vacíos.</div>
+              </div>
+              <div class="d-flex justify-content-center links">
+                <div id="errorContrasenyaRegistreDiv">Error: Contraseña incorrecta.</div>
+              </div>
+              <div class="d-flex justify-content-center links">
+                <div id="errorUsuariRegistreDiv2">Error: El email está duplicado.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--MESSAGE LIST-->
+
+      <div id="chatdiv" class="container d-flex justify-content-center overflow-auto" style="align-items: center;">
+        <div class="card d-flex flex-content w-100">
+          <div class="card-header">
+            <h3>Chat</h3>
+          </div>
+          <div class="card-body" id="error-message-container">
+            <div id="error-message"></div>
+          </div>
+          <div class="card-body">
+            <div class="input-group d-flex flex-content form-group">
+              <div id="spin" class="d-flex w-100 justify-content-center">
+                <img id="volta" class="img-responsive img-center" src="./img/loading.gif" alt=""
+                  longdesc="Una rueda que gira aparece cuando se cargan los mensajes.">
+              </div>
+              <ul class="list-group w-100" id="missatges">
+              </ul>
             </div>
           </div>
           <div class="card-footer">
-            <div class="d-flex justify-content-center links">
-              ¿No tienes una cuenta? <button id="register" class="btn-link">Regístrate</button>
-            </div>
-            <div class="d-flex justify-content-center">
-              <div id="errorlogindiv">Error: El usuario o la contraseña son incorrectos.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--SIGN UP-->
-
-    <div class="container" id="pswregistre">
-      <div class="d-flex justify-content-center h-100">
-        <div class="card" style="display: -webkit-box;">
-          <div class="card-header">
-            <h3>Regístrate</h3>
           </div>
           <div class="card-body">
-            <div class="input-group form-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-user" aria-hidden="true"></i></span>
-              </div>
-              <input type="text" id="nom-registre" name="NOM-REGISTRE" class="form-control" placeholder="Nombre">
-            </div>
-            <div class="input-group form-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-envelope" aria-hidden="true"></i></span>
-              </div>
-              <input type="text" id="email-registre" name="EMAIL-REGISTRE" class="form-control" placeholder="Email">
-            </div>
-            <div class="input-group form-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-key" aria-hidden="true"></i></span>
-              </div>
-              <input type="password" id="psw-registre" name="PSW-REGISTRE" class="form-control"
-                placeholder="Contraseña"><input type="password" id="psw-registre2" name="PSW-REGISTRE2"
-                class="form-control" placeholder="Repite la contraseña">
-            </div>
-            <div class="form-group">
-              <input type="submit" value="Regístrate" id="btRegistre" class="btn float-right login_btn red-focus-within">
-            </div>
-          </div>
-          <div class="card-footer">
-            <div class="d-flex justify-content-center links">
-              ¿Ya tienes una cuenta? <button id="signin">Inicia la sesión</button>
-            </div>
-            <div class="d-flex justify-content-center links">
-              <div id="errorUsuariRegistreDiv">Error: El usuario o el email no pueden estar vacíos.</div>
-            </div>
-            <div class="d-flex justify-content-center links">
-              <div id="errorContrasenyaRegistreDiv">Error: Contraseña incorrecta.</div>
-            </div>
-            <div class="d-flex justify-content-center links">
-              <div id="errorUsuariRegistreDiv2">Error: El email está duplicado.</div>
+            <div class="buit" style="height: 10rem;">
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!--MESSAGE LIST-->
+      <!--PROFILE-->
 
-    <div id="chatdiv" class="container d-flex justify-content-center overflow-auto" style="align-items: center;">
-      <div class="card d-flex flex-content w-100">
-        <div class="card-header">
-          <h3>Chat</h3>
-        </div>
-        <div class="card-body" id="error-message-container">
-          <div id="error-message"></div>
-        </div>
-        <div class="card-body">
-          <div class="input-group d-flex flex-content form-group">
-            <div id="spin" class="d-flex w-100 justify-content-center">
-              <img id="volta" class="img-responsive img-center" src="./img/loading.gif" alt="Loading symbol">
+      <div class="container" class="container d-flex justify-content-center" style="align-items: center;"
+        id="perfildiv">
+        <div class="d-flex justify-content-center h-100" id="container-content">
+          <div class="card" style="display: -webkit-box;">
+            <div class="card-header">
+              <h3>Perfil</h3>
             </div>
-            <ul class="list-group w-100" id="missatges">
-            </ul>
-          </div>
-        </div>
-        <div class="card-footer">
-        </div>
-        <div class="card-body">
-          <div class="buit" style="height: 10rem;">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--PROFILE-->
-
-    <div class="container" class="container d-flex justify-content-center" style="align-items: center;" id="perfildiv">
-      <div class="d-flex justify-content-center h-100" id="container-content">
-        <div class="card" style="display: -webkit-box;">
-          <div class="card-header">
-            <h3>Perfil</h3>
-          </div>
-          <div class="card-body">
-            <div class="input-group form-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-user" aria-hidden="true"></i></span>
+            <div class="card-body">
+              <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><em class="fas fa-user" aria-hidden="true"></em></span>
+                </div>
+                <input type="text" class="form-control" id="perfilnom"
+                  name="PERFILNOM" placeholder="Nombre">
               </div>
-              <input type="text" class="form-control" id="perfilnom" name="PERFILNOM" placeholder="Nombre">
-            </div>
-            <div class="input-group form-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-envelope" aria-hidden="true"></i></span>
+              <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><em class="fas fa-envelope" aria-hidden="true"></em></span>
+                </div>
+                <input type="text" class="form-control" id="perfilemail"
+                  name="PERFILEMAIL" placeholder="Email">
               </div>
-              <input type="text" class="form-control" id="perfilemail" name="PERFILEMAIL" placeholder="Email">
-            </div>
-            <div class="input-group form-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-key" aria-hidden="true"></i></span>
+              <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><em class="fas fa-key" aria-hidden="true"></em></span>
+                </div>
+                <input type="password" class="form-control" id="perfilpsw"
+                  name="PERFILPSW" placeholder="Contraseña">
               </div>
-              <input type="password" class="form-control" id="perfilpsw" name="PERFILPSW" placeholder="Contraseña">
-            </div>
-            <div class="d-flex flex-content justify-content-end">
-              <div class="input-group-prepend m-2 d-flex flex-content justify-content-end">
-                <input type="button" id="btperfilcancela" class="btn btn-danger mr-2 red-focus-within" value="Cancela">
-                <input type="button" id="btperfilguarda" class="btn btn-primary red-focus-within" value="Guarda">
+              <div class="d-flex flex-content justify-content-end">
+                <div class="input-group-prepend m-2 d-flex flex-content justify-content-end">
+                  <input type="button" id="btperfilcancela"
+                    class="btn btn-danger mr-2 red-focus-within" value="Cancela">
+                  <input type="button" id="btperfilguarda"
+                    class="btn btn-primary red-focus-within" value="Guarda">
+                </div>
               </div>
             </div>
-          </div>
-          <!--div class="input-group form-group">
+            <!--div class="input-group form-group">
           <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-key" aria-hidden="true"></i></span>
+            <span class="input-group-text"><em class="fas fa-key" aria-hidden="true"></em></span>
           </div>
           <input type="file" class="form-control" id="perfilfoto" name="PERFILFOTO">
         </div>-->
-          <div class="card-footer">
-            <div class="d-flex justify-content-center">
-              <div id="errormodperfil">Error: El usuario o la contraseña son incorrectos.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--GRAPHIC-->
-
-    <div class="container" id="graphicdiv">
-      <div class="d-flex justify-content-center w-100 h-100" id="container-content">
-        <div class="card w-100" style="display: -webkit-box;">
-          <div class="card-header">
-            <h3>Publicaciones de usuario</h3>
-          </div>
-          <div class="card-body">
-            <div class="input-group form-group d-flex justify-content-center">
-              <div class="w-100 h-100 d-flex justify-content-center">
-                <canvas id="graphic"></canvas>
+            <div class="card-footer">
+              <div class="d-flex justify-content-center">
+                <div id="errormodperfil">Error: El usuario o la contraseña son incorrectos.</div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <!--GRAPHIC-->
+
+      <div class="container" id="graphicdiv">
+        <div class="d-flex justify-content-center w-100 h-100" id="container-content">
+          <div class="card w-100" style="display: -webkit-box;">
+            <div class="card-header">
+              <h3>Publicaciones de usuario</h3>
+            </div>
+            <div class="card-body">
+              <div class="input-group form-group d-flex justify-content-center">
+                <div class="w-100 h-100 d-flex justify-content-center">
+                  <canvas id="graphic"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
+    <!-- Footer -->
+    <footer class="page-footer font-small special-color-dark pt-4 fixed-bottom bg-light" style="z-index: 1030; ">
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3">
+        <div class="input-group">
+          <select class="form-control mb-2" id="voiceOptions" tabindex="2"
+            style="width: 50%; flex: none; margin: auto;"></select>
+        </div>
+        <div class="input-group form-group w-100 justify-content-center" id="message-container">
+          <div class="w-50 justify-content-center">
+            <textarea class="form-control float-left" rows="2" cols="100" id="noumissatge"
+              placeholder="Escribe un mensaje..." style="resize: none; border-radius: 0.5rem;"></textarea>
+          </div>
+          <div class="justify-content-center">
+            <input type="button" id="btnoumsg"
+              class="btn btn-yellow border border-dark btn-lg active align-middle red-focus-within"
+              aria-label="Send message" title="Send message" value="+" style="height: 100%">
+          </div>
+        </div>
+        © 2020 Antoni Aloy Torrens
+        <a id="language-selection" href="../client/index.html">Cambia a Inglés</a>
+        <p class="font-weight-bold">El chat internacional para todos</p>
+      </div>
   </div>
-
-  <!-- Footer -->
-  <footer class="page-footer font-small special-color-dark pt-4 fixed-bottom bg-light" style="z-index: 1030; ">
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">
-      <div class="input-group">
-        <select class="form-control mb-2" id="voiceOptions" tabindex="2"
-          style="width: 50%; flex: none; margin: auto;"></select>
-      </div>
-      <div class="input-group form-group w-100 justify-content-center" id="message-container">
-        <div class="w-50 justify-content-center">
-          <textarea class="form-control float-left" rows="2" cols="100" id="noumissatge" placeholder="Escribe un mensaje..."
-            style="resize: none; border-radius: 0.5rem;"></textarea>
-        </div>
-        <div class="justify-content-center">
-          <input type="button" id="btnoumsg"
-            class="btn btn-yellow border border-dark btn-lg active align-middle red-focus-within"
-            aria-label="Send message" title="Send message" value="+" style="height: 100%">
-        </div>
-      </div>
-      © 2020 Antoni Aloy Torrens
-      <a id="language-selection" href="../client/index.html">Cambia a Inglés</a>
-      <p class="font-weight-bold">El chat internacional para todos</p>
-    </div>
-    </div>
-    <!-- Copyright -->
+  <!-- Copyright -->
 
   </footer>
   <!-- Footer -->
 </body>
 <!--Speech Converter-->
 <script src="./js/speechConverter.js"></script>
+<noscript>¡JavaScript debe estar activado para que la web funcione!</noscript>
 
 </html>

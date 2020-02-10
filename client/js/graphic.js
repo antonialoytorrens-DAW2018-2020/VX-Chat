@@ -1,4 +1,28 @@
 function creaGrafic(rq) {
+
+  function speak(text) {
+    window.speechSynthesis.cancel();
+    var msg = new SpeechSynthesisUtterance();
+    var voices = speechSynthesis.getVoices();
+  
+    for (var i = 0; i < voices.length; i++) {
+      if (voices[i].lang == "en-GB" && voices[i].name == "Google UK English Female") {
+        voice = voiceMap[voices[i].name];
+        break;
+      }
+      if (voices[i].lang == "en-GB" || voices[i].lang == "en_GB") { // GOOGLE CHROME ANDROID USES en_GB
+        voice = voiceMap[voices[i].name];
+      }
+    }
+  
+    msg.voice = voice;
+    msg.volume = 1;
+    msg.rate = 1.15;
+    msg.pitch = 1;
+    msg.text = text;
+    window.speechSynthesis.speak(msg);
+  }
+
   if (rq.readyState == 4 && rq.status == 200) {
     var resposta = JSON.parse(rq.responseText);
     var dades = resposta.dades;
@@ -21,7 +45,29 @@ function creaGrafic(rq) {
     }
     var speakMessage = headerMessage + resultText;
     setTimeout(function() {
-      speak(speakMessage)
+      function speak(text) {
+        window.speechSynthesis.cancel();
+        var msg = new SpeechSynthesisUtterance();
+        var voices = speechSynthesis.getVoices();
+      
+        for (var i = 0; i < voices.length; i++) {
+          if (voices[i].lang == "en-GB" && voices[i].name == "Google UK English Female") {
+            voice = voiceMap[voices[i].name];
+            break;
+          }
+          if (voices[i].lang == "en-GB" || voices[i].lang == "en_GB") { // GOOGLE CHROME ANDROID USES en_GB
+            voice = voiceMap[voices[i].name];
+          }
+        }
+      
+        msg.voice = voice;
+        msg.volume = 1;
+        msg.rate = 1.15;
+        msg.pitch = 1;
+        msg.text = text;
+        window.speechSynthesis.speak(msg);
+      }
+      speak(speakMessage);
     }, 3000);
 
     new Chart(document.getElementById("graphic").getContext("2d"), {

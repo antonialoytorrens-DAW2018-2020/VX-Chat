@@ -38,24 +38,17 @@ function speak(text) {
 
   for (var i = 0; i < voices.length; i++) {
     if (voices[i].lang == "es-ES" && voices[i].name == "Google español") {
-      var android = "";
       var voice = voiceMap[voices[i].name];
       break;
     }
     if (voices[i].lang == "es-ES" || voices[i].lang == "es_ES") { // GOOGLE CHROME ANDROID uses es_ES
-      var android = "";
       var voice = voiceMap[voices[i].name];
     }
   }
-
-  if (android == undefined) {
-    alert('Tu navegador no soporta español (es-ES) en síntesis de voz. Si es Google Chrome, por favor, actualízalo.');
-  } else {
-    msg.voice = voice;
-    msg.volume = 1;
-    msg.rate = 1.15;
-    msg.pitch = 1;
-    msg.text = text;
-    window.speechSynthesis.speak(msg);
-  }
+  msg.voice = voice;
+  msg.volume = 1;
+  msg.rate = 1.15;
+  msg.pitch = 1;
+  msg.text = text;
+  window.speechSynthesis.speak(msg);
 }

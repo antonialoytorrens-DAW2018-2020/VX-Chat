@@ -52,6 +52,10 @@ body {
   text-decoration: underline;
 }
 
+label {
+  display: none;
+}
+
 @media(max-width: 680px) {
   footer {
     display: fixed;
