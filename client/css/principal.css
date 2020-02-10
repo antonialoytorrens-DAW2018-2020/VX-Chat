@@ -63,6 +63,10 @@ select {
   font-size: 18px !important;
 }
 
+.btn-link {
+  font-size: 16px !important;
+}
+
 textarea {
   resize: none !important; 
   border-radius: 0.5rem !important;

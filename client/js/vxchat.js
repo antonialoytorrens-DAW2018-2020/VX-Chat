@@ -469,9 +469,12 @@ function mostraMissatges(rq) {
     var resposta = JSON.parse(rq.responseText);
     // Sessió no iniciada
     if (!resposta.correcta) {
+      let msg = document.getElementById('error-message-container');
       msg.innerHTML = '<h3><p class="bg-danger text-center">' + resposta.missatge + '</p></h3>';
+      msg.setAttribute("display", "block");
     }
     else {
+      document.getElementById('error-message-container').setAttribute("display", "none");
       var json = resposta.dades;
       for (i in json) {
         let datahora = json[i].datahora;
