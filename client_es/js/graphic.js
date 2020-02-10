@@ -66,7 +66,7 @@ function creaGrafic(rq) {
         window.speechSynthesis.speak(msg);
       }
       speak(speakMessage)
-    }, 3000);
+    }, 3500);
 
     new Chart(document.getElementById("graphic").getContext("2d"), {
       type: 'horizontalBar',
