@@ -52,6 +52,22 @@ body {
   text-decoration: underline;
 }
 
+input[type=text], input[type=submit], input[type=password], input[type=button], button, textarea {
+  font-size: 20px !important;
+}
+
+select {
+  width: 50% !important; 
+  flex: none !important; 
+  margin: auto !important;
+  font-size: 18px !important;
+}
+
+textarea {
+  resize: none !important; 
+  border-radius: 0.5rem !important;
+}
+
 label {
   display: none;
 }
