@@ -11,7 +11,7 @@ Obre un terminal i executa:
 
 Així ja haurem importat la base de dades.
 
-Ara, mou el projecte a `/var/www/html/`. Després obre el navegador i vés a `localhost/XAT/client` .
+Ara, mou el projecte a `/var/www/html/`. Després obre el navegador i vés a `localhost/VX-Chat/client` .
 
 `localhost/XAT/client_es` està en desús.
 
@@ -28,7 +28,7 @@ Abre un terminal y ejecuta:
 
 Así ya habremos importado la base de datos.
 
-Ahora, mueve el proyecto a `/var/www/html/`. Luego abre el navegador y ve a `localhost/XAT/client` .
+Ahora, mueve el proyecto a `/var/www/html/`. Luego abre el navegador y ve a `localhost/VX-Chat/client` .
 
 `localhost/XAT/client_es` está en desuso.
 
