@@ -104,10 +104,10 @@ function afegeixUsuari(rq) {
           var note_message = document.getElementById('note_message');
           note_message.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><b>User has been created.</b>';
           showIt(document.getElementById("modal"));
-          document.getElementById('nom-registre').innerHTML = '';
-          document.getElementById('email-registre').innerHTML = '';
-          document.getElementById('psw-registre').innerHTML = '';
-          document.getElementById('psw-registre2').innerHTML = '';
+          document.getElementById('nom-registre').value = '';
+          document.getElementById('email-registre').value = '';
+          document.getElementById('psw-registre').value = '';
+          document.getElementById('psw-registre2').value = '';
           carregaInici();
         }
       }
@@ -194,7 +194,7 @@ function carregaXat(rq) {
   carregaDropdown();
   estaObertDropdown();
 
-  boto.addEventListener("click", function () {
+  boto.addEventListener("click", function(event) {
     if (isEmptyOrSpaces(document.getElementById("noumissatge").value)) {
       let note_message = document.getElementById("note_message");
       note_message.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i><b> Message cannot be blank.</b>';
@@ -203,6 +203,7 @@ function carregaXat(rq) {
     } else {
       var rq = agafaObjecte();
       enviaMissatge(rq);
+      event.stopPropagation();
     }
   });
 
@@ -766,3 +767,4 @@ function carregaOnFocusElements() {
     });
 
 }
+
